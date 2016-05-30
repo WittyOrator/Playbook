@@ -1,0 +1,32 @@
+﻿<Window x:Class="Webb.Playbook.About"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="About" Height="200" Width="300"
+        WindowStartupLocation="CenterOwner"
+        WindowStyle="ToolWindow"
+        ResizeMode="NoResize">
+    <Grid Background="{DynamicResource NormalBackgroundBrush}">
+        <Grid.Resources>
+            <Style TargetType="{x:Type TextBlock}">
+                <Setter Property="Foreground" Value="{DynamicResource OutsideTextBrush}"/>
+            </Style>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <StackPanel Grid.Row="0" VerticalAlignment="Center" Orientation="Vertical">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock FontSize="15" Width="70" VerticalAlignment="Center" Margin="50,0,0,0">Name:</TextBlock>
+                <TextBlock FontSize="15" x:Name="tbAppName" VerticalAlignment="Center" >Webb Playbook</TextBlock>
+            </StackPanel>
+            <StackPanel Margin="0,20,0,0" Orientation="Horizontal">
+                <TextBlock FontSize="15" Width="70" VerticalAlignment="Center" Margin="50,0,0,0">Version:</TextBlock>
+                <TextBlock FontSize="15" x:Name="tbAppVersion" VerticalAlignment="Center">0.1.0.0</TextBlock>
+            </StackPanel>
+        </StackPanel>
+        <Button HorizontalAlignment="Center" VerticalAlignment="Center" Width="80" Height="25" Grid.Row="1" Click="Button_Click">OK</Button>
+        
+    </Grid>
+</Window>

@@ -1,0 +1,85 @@
+﻿<Window
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	x:Class="Webb.Playbook.Call.CallEditor"
+   xmlns:ds="clr-namespace:Webb.Playbook.Data;assembly=Webb.Playbook.Data"
+	x:Name="Window"
+	Title="Call Editor"
+	Width="567" Height="500" WindowStartupLocation="CenterOwner" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" Icon="/Call Editor;component/Resource/Call.ico">
+    <Window.Resources>
+        <Style TargetType="Grid">
+            <Setter Property="Background" Value="{DynamicResource StackPanelBackgroundBrush}"/>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{DynamicResource OutsideTextBrush}"/>
+        </Style>
+    </Window.Resources>
+    <Border BorderThickness="2" BorderBrush="SteelBlue" Width="Auto" Height="Auto"  IsHitTestVisible="True" AllowDrop="True">
+        <Grid Width="Auto" Height="Auto" x:Name="grdBinding">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="0.429*"/>
+                <RowDefinition Height="95"/>
+                <RowDefinition Height="0.32*"/>
+                <RowDefinition Height="38"/>
+            </Grid.RowDefinitions>
+            <Menu x:Name="menuMain" Grid.Row="0" Grid.RowSpan="1" Grid.ColumnSpan="2">
+                <MenuItem Header="Themes" Name="menuItemThemes"/>
+            </Menu>
+            <GroupBox Margin="8,8,8,8" Header="Questions" Grid.Row ="1" Width="Auto" Height="Auto">
+                <Grid Margin="8,22,21,8" Width="Auto" Height="Auto">
+                    <ListBox IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding Path=Questions,Mode=TwoWay}"  AllowDrop="True" Margin="8,0,-4,24" x:Name="lstQustion">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                   <TextBlock Text="{Binding Path = Content,Mode=TwoWay}"/>
+                                </TextBlock>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <Button HorizontalAlignment="Left"  x:Name ="btnAddQuestion" Margin="38,0,0,-4" VerticalAlignment="Bottom" Width="104" Height="23" Content="Add Question" Click="btnAddQuestion_Click" />
+                    <Button VerticalAlignment="Bottom"  x:Name="btnEditQuestion" Margin="204,0,176,-5"  Height="23" Content="Edit Question" Click="btnEditQuestion_Click" />
+                    <Button HorizontalAlignment="Right" x:Name="btnDeleteQuestion" Height="23"  Width="104" Content="Delete Question"   Margin="0,0,34,-5" VerticalAlignment="Bottom" Click="btnDeleteQuestion_Click" />
+                </Grid>
+            </GroupBox>
+            
+            <GroupBox Margin="8,8,8,8" Grid.Row="2" Header="Groups" Width="Auto" Height="Auto" >
+                <Grid Width="Auto" Height="Auto">
+                    <ComboBox IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding Path=Answers,Mode=TwoWay}"  x:Name="cmbGroup" Margin="16,3.873,15,0" Height="24" VerticalAlignment="Top">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                <TextBlock Text="{Binding Path = Name,Mode=TwoWay}"/>
+                                </TextBlock>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <Button HorizontalAlignment="Left" x:Name ="btnAddGroup" Margin="46,0,0,-1" VerticalAlignment="Bottom" Width="104" Height="23" Content="Add Group" d:LayoutOverrides="VerticalAlignment" Click="btnAddGroup_Click" />
+                    <Button Margin="213,0,196,-2"  x:Name="btnRenameGroup" Content="Rename Group" d:LayoutOverrides="VerticalAlignment" Click="btnRenameGroup_Click" Height="23" VerticalAlignment="Bottom" />
+                    <Button HorizontalAlignment="Right" x:Name ="btnRemoveGroup" Margin="0,0,55,-2" VerticalAlignment="Bottom" Width="104" Height="23" Content="Remove Group" Click="btnRemoveGroup_Click" />
+                </Grid>
+            </GroupBox>
+            
+            <GroupBox Margin="8,8,8,8" Grid.Row="3" Header="Group Items"  Width="Auto" Height="Auto">
+                <Grid Width="Auto" Height="Auto">
+                    <ListBox  x:Name="lstItems"  ItemsSource="{Binding ElementName=cmbGroup,Path=SelectedValue.Items}" IsSynchronizedWithCurrentItem="True" Margin="16,10.673,15,22">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                     <TextBlock Text= "{Binding Path = Value,Mode=TwoWay}"/>
+                                </TextBlock>
+                            </DataTemplate>
+                       </ListBox.ItemTemplate>
+                    </ListBox>
+                    <Button HorizontalAlignment="Left" x:Name="btnAddItem" Margin="48,0,0,-5" VerticalAlignment="Bottom" Width="104" Height="23" Content="Add Item" Click="btnAddItem_Click" />
+                    <Button Margin="214,0,195,-5" x:Name="btnEditItem" VerticalAlignment="Bottom" Height="23" Content="Edit Item" Click="btnEditItem_Click" />
+                    <Button HorizontalAlignment="Right" x:Name="btnDeleteItem" Margin="0,0,53,-4" VerticalAlignment="Bottom" Width="104" Height="23" Content="Delete Item" Click="btnDeleteItem_Click" />
+                </Grid>
+            </GroupBox>
+            
+            <Button HorizontalAlignment="Left"  x:Name="btnOk" Margin="100,8,0,8" Width="120" Content="OK" Grid.Row="4" Click="btnOk_Click" />
+            <Button HorizontalAlignment="Right" x:Name="btnCancel" Margin="0,8,100,8" Width="120" Content="Cancel" Grid.Row="4" Click="btnCancel_Click" />
+        </Grid>
+
+    </Border>
+</Window>

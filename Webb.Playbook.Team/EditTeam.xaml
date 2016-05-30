@@ -1,0 +1,88 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	x:Class="Webb.Playbook.Team.EditTeam"
+    xmlns:ds="clr-namespace:Webb.Playbook.Data;assembly=Webb.Playbook.Data"
+	x:Name="UserControl"
+    
+	Width="Auto" Height="Auto" Loaded="Window_Loaded"   xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style TargetType="Grid">
+            <Setter Property="Background" Value="{DynamicResource StackPanelBackgroundBrush}"/>
+        </Style>
+        
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{DynamicResource OutsideTextBrush}"/>
+        </Style>
+        
+    </UserControl.Resources>
+   
+    <Border BorderThickness="2" BorderBrush="SteelBlue" Width="Auto" Height="Auto"  IsHitTestVisible="True" AllowDrop="True">
+        <GroupBox x:Name="grboxTeam" Header="">
+			<Grid x:Name="gridBinding" Height="Auto" Width="Auto" Button.Click ="CommonClickHandler" Loaded="Window_Loaded">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"></RowDefinition>
+                <RowDefinition Height="8*"></RowDefinition>
+                <RowDefinition Height="6*"></RowDefinition>
+                
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <TextBlock HorizontalAlignment="Left"  Margin="8,12.25,0,0" VerticalAlignment="Top" Width="34.225" Height="18" Text="Name:" TextWrapping="Wrap" FontSize="12"/>
+				<Button HorizontalAlignment="Right" x:Name="btnChName" Margin="0,11.25,31.125,0" VerticalAlignment="Top" Width="104" Height="22" Content="Change..."/>
+				<TextBlock HorizontalAlignment="Left" x:Name="txtTeamName"  Text="{Binding Path=Name, Mode=TwoWay}" Margin="46.225,11.75,0,0" VerticalAlignment="Top" Width="140" Height="18"  TextWrapping="Wrap" FontSize="12"/>
+            </Grid>
+				<GroupBox Grid.Row="1" Header="Uniforms">
+        		<Grid>
+				<Grid.RowDefinitions>
+                  <RowDefinition Height="1*"></RowDefinition>
+                  <RowDefinition Height="1*"></RowDefinition>
+				 
+               </Grid.RowDefinitions>
+				        <Grid  Grid.Row="0" Margin="2,6.197,8.781,0" VerticalAlignment="Top" Height="27">
+						  <TextBlock HorizontalAlignment="Left" Margin="2.4,8.133,0,0" VerticalAlignment="Top" Width="75" Height="18" Text="Helmet:" TextWrapping="Wrap" FontSize="12"/>
+						  <Rectangle HorizontalAlignment="Left" x:Name ="recHelmet" Margin="134.125,4.133,0,0" VerticalAlignment="Top" Width="96" Height="22"  Stroke="#FF000000">
+                            <Rectangle.Fill>
+                                <SolidColorBrush Color="{Binding HelmetColorSet.BaseColor,Mode=OneWay}"/>
+                            </Rectangle.Fill>
+                          </Rectangle>
+						  <Button HorizontalAlignment="Right" x:Name="btnChHelmet" Margin="0,4.133,9.656,0" VerticalAlignment="Top" Width="104" Height="22" Content="Change..." FontSize="12"/>
+						</Grid>
+                        
+						<Grid  Grid.Row="1"  x:Name="gridhome" Height="27">
+						   <TextBlock HorizontalAlignment="Left" Margin="2.4,6.133,0,2.867" Width="75" Text="Home Jersey:" Height="18" TextWrapping="Wrap" FontSize="12" d:LayoutOverrides="VerticalAlignment"/>
+						   <Rectangle HorizontalAlignment="Left" x:Name ="recHome" Margin="136.125,3.133,0,1.867" Width="96" Height="22"  Stroke="#FF000000" d:LayoutOverrides="VerticalAlignment" >
+                            <Rectangle.Fill>
+                                <SolidColorBrush Color="{Binding HomeJerseyColorSet.TorsoColor,Mode=OneWay}"/>
+                             </Rectangle.Fill>
+                           </Rectangle>
+						   <Button HorizontalAlignment="Right" x:Name="btnChHome" Margin="0,2.133,19.656,2.867" Width="104"  Height="22" Content="Change..." FontSize="12" d:LayoutOverrides="VerticalAlignment"/>
+						</Grid>
+						
+					    <Grid  Grid.Row="1"  x:Name="gridAway" Height="27">
+						   <TextBlock HorizontalAlignment="Left" Margin="2.4,0,0,1" Width="75" Text="Away Jersey:" TextWrapping="Wrap" Height="18" VerticalAlignment="Bottom" FontSize="12"/>
+                           <Rectangle HorizontalAlignment="Left" x:Name ="recAway" Margin="137.125,0,0,1" VerticalAlignment="Bottom" Width="96" Height="22"  Stroke="#FF000000">
+                              <Rectangle.Fill>
+                                  <SolidColorBrush Color="{Binding AwayJerseyColorSet.TorsoColor,Mode=OneWay}"/>
+                              </Rectangle.Fill>
+                           </Rectangle>
+                           <Button HorizontalAlignment="Right" x:Name="btnChAway" Margin="0,0,19.656,1" VerticalAlignment="Bottom" Width="104" Height="22" Content="Change..." FontSize="12"/>
+                        </Grid>
+						
+                       </Grid>
+					   </GroupBox>
+			<StackPanel Grid.Row="2" Visibility="Visible">
+				<Grid>
+				<Button HorizontalAlignment="Left"  x:Name ="btnShPlayer" Margin="35.125,4,0,63.25"  Width="160" Height="24" Content="Show Players"/>
+				<Button HorizontalAlignment="Left" x:Name ="btnShLine" Margin="35.125,35.5,0,31.75"  Width="160" Height="24" Content="Show Lineup" d:LayoutOverrides="VerticalAlignment"/>
+				<Button HorizontalAlignment="Right" x:Name ="btnImPlayer"  Margin="0,4,31.125,63.25"  Width="160" Height="24" Content="Import Player..."/>
+				<Button HorizontalAlignment="Right" x:Name ="btnImPlStats" Margin="0,36.666,31.125,30.584"  Width="160" Height="24" Content="Import Player Stats..." d:LayoutOverrides="VerticalAlignment"/>
+				<Button HorizontalAlignment="Left" x:Name ="btnOk" Margin="70.5,0,0,4"  Width="88" Height="23.25" Content="Ok" VerticalAlignment="Bottom" d:LayoutOverrides="Height"/>
+				<Button HorizontalAlignment="Right" x:Name="btnCancel" Margin="0,0,71.125,1.667" Width="88" Height="23.25" Content="Cancel" VerticalAlignment="Bottom" d:LayoutOverrides="Height"/>
+				</Grid>
+				</StackPanel>
+			
+			</Grid>
+            </GroupBox>
+	</Border>
+</UserControl>

@@ -1,0 +1,13 @@
+﻿<Window x:Class="Webb.Playbook.Geometry.DiagramBackgroundWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:geo="clr-namespace:Webb.Playbook.Geometry;assembly=Webb.Playbook.Geometry"
+    Title="" Width="720" Height="480"
+    WindowStartupLocation="CenterOwner"
+    WindowStyle="None">
+    <Grid>
+        <Canvas x:Name="canvas">
+            
+        </Canvas>
+    </Grid>
+</Window>

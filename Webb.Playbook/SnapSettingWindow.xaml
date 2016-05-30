@@ -1,0 +1,26 @@
+﻿<Window x:Class="Webb.Playbook.SnapSettingWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Snap Setting" Height="200" Width="300"
+    WindowStartupLocation="CenterOwner">
+    <Grid Background="{DynamicResource NormalBackgroundBrush}" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical">
+            <CheckBox x:Name="checkSnap" IsChecked="{Binding SnapToGrid}" Focusable="False" HorizontalAlignment="Center" Foreground="{DynamicResource OutsideTextBrush}" Margin="0,0,0,20"> Snap To Grid</CheckBox>
+            <ComboBox x:Name="cbSnapValue" Width="120" Text="{Binding Path=SnapValue}">
+                <ComboBoxItem>6</ComboBoxItem>
+                <ComboBoxItem>12</ComboBoxItem>
+                <ComboBoxItem>18</ComboBoxItem>
+            </ComboBox>
+        </StackPanel>
+        
+        <StackPanel Orientation="Horizontal" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Button x:Name="btnOK" Width="80" Click="btnOK_Click">OK</Button>
+            <!--<Button x:Name="btnCancel" Width="80" Click="btnCancel_Click">Cancel</Button>-->
+        </StackPanel>
+        
+    </Grid>
+</Window>

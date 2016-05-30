@@ -1,0 +1,14 @@
+﻿<Window x:Class="Webb.Playbook.Print.PrintPreviewWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:print="clr-namespace:Webb.Playbook.Print"
+    Title="Print Preview" Height="300" Width="300"
+    WindowState="Maximized" WindowStartupLocation="CenterOwner" MinWidth="800" MinHeight="600" Icon="/Playbook;component/Resource/Print.ico">
+    <Grid>
+        <print:CustomDocumentViewer x:Name="docViewer">
+            <FixedDocument x:Name="fixedDoc">
+                
+            </FixedDocument>
+        </print:CustomDocumentViewer>
+    </Grid>
+</Window>

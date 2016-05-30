@@ -1,0 +1,114 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+   xmlns:ds="clr-namespace:Webb.Playbook.Data;assembly=Webb.Playbook.Data"    
+    x:Class="Webb.Playbook.Team.TeamLineup"    
+    Height="Auto" Width="Auto"  Background="{DynamicResource StackPanelBackgroundBrush}"   xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" >
+    <UserControl.Resources>
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="Foreground" Value="{DynamicResource OutsideTextBrush}"/>
+        </Style>
+        <DataTemplate x:Key="LineupTemplate" DataType="{x:Type ds:LineupSetting}">
+            <Border BorderThickness="1">
+            <StackPanel x:Name="sp" Orientation="Horizontal">
+                <TextBlock Width="30" Text="{Binding Path=NameValue}"/>
+                <ComboBox x:Name="cmbPlayers" Width="80" ItemsSource="{Binding Path=Players, Mode=Twoway,UpdateSourceTrigger=Explicit}"  SelectedValue="{Binding Player ,Mode=TwoWay,UpdateSourceTrigger=Explicit}" SelectionChanged="ComboBox_SelectionChanged"  DropDownOpened="cmbPlayers_DropDownOpened" >
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock>
+                              <TextBlock Text="{Binding Path= Name}"/>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+            </Border>    
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <Grid Margin="10" x:Name="grid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50*"/>
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="50*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+
+        <Border CornerRadius="10,10,10,10" BorderBrush="Gray" BorderThickness="2" Grid.Column="0" Grid.ColumnSpan="1">
+            <Grid x:Name="gridOffense" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50*"/>
+                    <ColumnDefinition Width="50*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50*"/>
+                    <RowDefinition Height="50*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="Offense" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" TextAlignment="Center" VerticalAlignment="Center"/>
+                <GroupBox x:Name="groupQB" Grid.Row="1" Grid.Column="1" Header="Quarterback" Margin="-1,0,1,0">
+                    <ItemsControl  ItemTemplate="{StaticResource LineupTemplate}" ItemsSource="{Binding Path=Quarterback}" />
+                </GroupBox>
+
+                <GroupBox x:Name="groupRev" Grid.Row="2" Grid.Column="0" Header="Receivers">
+                    <ItemsControl  ItemTemplate="{StaticResource LineupTemplate}" ItemsSource="{Binding Path=Receivers}" />
+                </GroupBox>
+
+                <GroupBox x:Name="groupRB" Grid.Row="2" Grid.Column="1" Header="Running Backs">
+                    <ItemsControl  ItemTemplate="{StaticResource LineupTemplate}" ItemsSource="{Binding Path=Runningbacks}" />
+                </GroupBox>
+
+                <GroupBox x:Name="groupOL" Grid.Row="3" Grid.Column="0" Header="Offensive Linemen">
+                    <ItemsControl  ItemTemplate="{StaticResource LineupTemplate}" ItemsSource="{Binding Path=OffensiveLinemen}" />
+                </GroupBox>
+
+                <GroupBox x:Name="groupTE" Grid.Row="3" Grid.Column="1" Header="Tight Ends">
+                    <ItemsControl   ItemTemplate="{StaticResource LineupTemplate}" ItemsSource="{Binding Path=TightEnds}" />
+                </GroupBox>
+            </Grid>
+        </Border>
+
+        <Border CornerRadius="10,10,10,10" BorderBrush="Gray" BorderThickness="2" Grid.Column="2" Grid.ColumnSpan="1">
+            <Grid x:Name="gridDefense">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50*"/>
+                    <ColumnDefinition Width="50*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50*"/>
+                    <RowDefinition Height="50*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="Defense" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" TextAlignment="Center" VerticalAlignment="Center"/>
+
+                <GroupBox x:Name="groupCB" Grid.Row="2" Grid.Column="0" Header="Cornerbacks">
+                    <ItemsControl   ItemTemplate="{StaticResource LineupTemplate}" ItemsSource="{Binding Path=Cornerbacks}" />
+                </GroupBox>
+
+                <GroupBox x:Name="groupLB" Grid.Row="2" Grid.Column="1" Header="Linebackers">
+                    <ItemsControl  ItemTemplate="{StaticResource LineupTemplate}" ItemsSource="{Binding Path=Linebackers}" />
+                </GroupBox>
+
+                <GroupBox x:Name="groupDL" Grid.Row="3" Grid.Column="0" Header="Defensive Linemen">
+                    <ItemsControl  ItemTemplate="{StaticResource LineupTemplate}" ItemsSource="{Binding Path=DefensiveLinemen}" />
+                </GroupBox>
+
+                <GroupBox x:Name="groupSafe" Grid.Row="3" Grid.Column="1" Header="Safeties">
+                    <ItemsControl  ItemTemplate="{StaticResource LineupTemplate}" ItemsSource="{Binding Path=Safeties}" />
+                </GroupBox>
+            </Grid>
+        </Border>
+        <Button x:Name="btnOk"  Grid.Row="1" Margin="10,0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="60" Height="25" Click="btnOk_Click" Content="OK"/>
+        <Button x:Name="btnCancel" Grid.Row="1" Margin="10,0" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" Width="60" Height="25" Click="btnCancel_Click" Content="Cancel"/>
+    </Grid>
+</UserControl>

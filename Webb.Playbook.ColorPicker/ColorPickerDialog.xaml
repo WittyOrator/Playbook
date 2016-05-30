@@ -1,0 +1,72 @@
+<Window
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  x:Class="Microsoft.Samples.CustomControls.ColorPickerDialog"
+  xmlns:customControls="clr-namespace:Microsoft.Samples.CustomControls"
+  Title="Select a Color"
+  Width="600"
+  Height="400"
+  WindowStartupLocation="CenterOwner"
+  ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+        </Grid.RowDefinitions>
+        <customControls:ColorPicker x:Name="cPicker" SelectedColorChanged="onSelectedColorChanged" Margin="10,0"/>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left" Margin="10">
+            <ToolBar Width="375" Height="30" HorizontalAlignment="Left" Margin="0,0,10,0" x:Name="toolColors">
+                <Button Width="20" Height="20" Click="Button_Click">
+                    <Border Width="18" Height="18" VerticalAlignment="Center" HorizontalAlignment="Center" Background="Black" ToolTip="Black"></Border>
+                </Button>
+                <Button Width="20" Height="20" Click="Button_Click">
+                    <Border Width="18" Height="18" VerticalAlignment="Center" HorizontalAlignment="Center" Background="White" ToolTip="White"></Border>
+                </Button>
+                <Button Width="20" Height="20" Click="Button_Click">
+                    <Border Width="18" Height="18" VerticalAlignment="Center" HorizontalAlignment="Center" Background="Red" ToolTip="Red"></Border>
+                </Button>
+                <Button Width="20" Height="20" Click="Button_Click">
+                    <Border Width="18" Height="18" VerticalAlignment="Center" HorizontalAlignment="Center" Background="Green" ToolTip="Green"></Border>
+                </Button>
+                <Button Width="20" Height="20" Click="Button_Click">
+                    <Border Width="18" Height="18" VerticalAlignment="Center" HorizontalAlignment="Center" Background="Blue" ToolTip="Blue"></Border>
+                </Button>
+                <Button Width="20" Height="20" Click="Button_Click">
+                    <Border Width="18" Height="18" VerticalAlignment="Center" HorizontalAlignment="Center" Background="Cyan" ToolTip="Cyan"></Border>
+                </Button>
+                <Button Width="20" Height="20" Click="Button_Click">
+                    <Border Width="18" Height="18" VerticalAlignment="Center" HorizontalAlignment="Center" Background="Magenta" ToolTip="Magenta"></Border>
+                </Button>
+                <Button Width="20" Height="20" Click="Button_Click">
+                    <Border Width="18" Height="18" VerticalAlignment="Center" HorizontalAlignment="Center" Background="Yellow" ToolTip="Yellow"></Border>
+                </Button>
+                <Button Width="20" Height="20" Click="Button_Click">
+                    <Border Width="18" Height="18" VerticalAlignment="Center" HorizontalAlignment="Center" Background="DarkRed" ToolTip="Dark Red"></Border>
+                </Button>
+                <Button Width="20" Height="20" Click="Button_Click">
+                    <Border Width="18" Height="18" VerticalAlignment="Center" HorizontalAlignment="Center" Background="DarkGreen" ToolTip="Dark Green"></Border>
+                </Button>
+                <Button Width="20" Height="20" Click="Button_Click">
+                    <Border Width="18" Height="18" VerticalAlignment="Center" HorizontalAlignment="Center" Background="DarkBlue" ToolTip="Dark Blue"></Border>
+                </Button>
+                <Button Width="20" Height="20" Click="Button_Click">
+                    <Border Width="18" Height="18" VerticalAlignment="Center" HorizontalAlignment="Center" Background="Olive" ToolTip="Olive"></Border>
+                </Button>
+                <Button Width="20" Height="20" Click="Button_Click">
+                    <Border Width="18" Height="18" VerticalAlignment="Center" HorizontalAlignment="Center" Background="Teal" ToolTip="Teal"></Border>
+                </Button>
+                <Button Width="20" Height="20" Click="Button_Click">
+                    <Border Width="18" Height="18" VerticalAlignment="Center" HorizontalAlignment="Center" Background="Gray" ToolTip="Gray"></Border>
+                </Button>
+            </ToolBar>
+
+            <Button Name="OKButton" Width="80" Height="25" Click="okButtonClicked" IsEnabled="True">OK</Button>
+            <Button Click="cancelButtonClicked" Margin="10,0,0,0" Width="80" Height="25">Cancel</Button>
+
+        </StackPanel>
+
+
+    </Grid>
+
+
+</Window>

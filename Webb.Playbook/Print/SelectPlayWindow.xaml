@@ -1,0 +1,161 @@
+﻿<Window x:Class="Webb.Playbook.Print.SelectPlayWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:viewmodel="clr-namespace:Webb.Playbook.ViewModel"
+    Title="Select Game To Print" Height="600" Width="800" WindowStartupLocation="CenterOwner" ResizeMode="NoResize" WindowStyle="ToolWindow" Icon="/Playbook;component/Resource/Print.ico">
+    <Grid x:Name="grid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TabControl Name="tabControl" TabStripPlacement="Top" Grid.Row="0" Grid.Column="0">
+            <TabItem Header="Formation">
+                <TreeView x:Name="treeFormation" ItemsSource="{Binding Path=ScoutTypes}" Margin="5">
+                    <TreeView.Resources>
+                        <HierarchicalDataTemplate DataType="{x:Type viewmodel:ScoutTypeViewModel}" ItemsSource="{Binding Path=Children}" >
+                            <StackPanel Orientation="Horizontal" MouseLeftButtonDown="treeFormation_MouseLeftButtonDown">
+                                <Image Source="{Binding Path=Image}" Width="20" Height="20" />
+                                <TextBlock VerticalAlignment="Center" Text="{Binding Path=ScoutTypeName}"/>
+                            </StackPanel>
+                        </HierarchicalDataTemplate>
+
+                        <HierarchicalDataTemplate DataType="{x:Type viewmodel:TitleViewModel}">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="{Binding Image}" Width="20" Height="20"/>
+                                <TextBlock VerticalAlignment="Center" Text="{Binding TitleName}"/>
+                            </StackPanel>
+                        </HierarchicalDataTemplate>
+
+                        <HierarchicalDataTemplate DataType="{x:Type viewmodel:PersonnelViewModel}" ItemsSource="{Binding Path=Children}">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="{Binding Path=Image}" Width="20" Height="20" />
+                                <TextBlock VerticalAlignment="Center" Text="{Binding Path=PersonnelName}"/>
+                            </StackPanel>
+                        </HierarchicalDataTemplate>
+
+                        <HierarchicalDataTemplate DataType="{x:Type viewmodel:FormationViewModel}" ItemsSource="{Binding Path=Children}">
+                            <StackPanel Orientation="Horizontal" MouseLeftButtonDown="treeFormation_MouseLeftButtonDown" >
+                                <Image Source="{Binding Path=Image}" Width="20" Height="20" />
+                                <TextBlock VerticalAlignment="Center" Text="{Binding Path=FormationName}"/>
+                            </StackPanel>
+                        </HierarchicalDataTemplate>
+
+                        <HierarchicalDataTemplate DataType="{x:Type viewmodel:FolderViewModel}" ItemsSource="{Binding Path=Children}">
+                            <StackPanel Orientation="Horizontal" MouseLeftButtonDown="treeFormation_MouseLeftButtonDown">
+                                <Image Source="{Binding Path=Image}" Width="20" Height="20" />
+                                <TextBlock VerticalAlignment="Center" Text="{Binding Path=Name}"/>
+                            </StackPanel>
+                        </HierarchicalDataTemplate>
+
+                        <HierarchicalDataTemplate DataType="{x:Type viewmodel:PlayViewModel}" ItemsSource="{Binding Path=Children}">
+                            <StackPanel Orientation="Horizontal" MouseLeftButtonDown="treeFormation_MouseLeftButtonDown">
+                                <Image Source="{Binding Image}" Width="20" Height="20" />
+                                <TextBlock Text="{Binding PlayName}" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </HierarchicalDataTemplate>
+                    </TreeView.Resources>
+                </TreeView>
+            </TabItem>
+            <TabItem Header="Game Plan">
+                <TreeView x:Name="treePlaybook" Panel.ZIndex="1" Grid.Row="0" ItemsSource="{Binding PlayTypes}">
+                    <TreeView.Resources>
+                        <HierarchicalDataTemplate DataType="{x:Type viewmodel:PlayTypeViewModel}" ItemsSource="{Binding Path=Children}">
+                            <StackPanel Orientation="Horizontal" MouseLeftButtonDown="treeFormation_MouseLeftButtonDown">
+                                <Image Source="{Binding Image}" Width="20" Height="20" />
+                                <TextBlock Text="{Binding PlayTypeName}" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </HierarchicalDataTemplate>
+                        <HierarchicalDataTemplate DataType="{x:Type viewmodel:PlayViewModel}" ItemsSource="{Binding Path=Children}">
+                            <StackPanel Orientation="Vertical" MouseLeftButtonDown="treeFormation_MouseLeftButtonDown" >
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="{Binding Image}" Width="20" Height="20" />
+                                    <TextBlock Text="{Binding PlayName}" VerticalAlignment="Center" />
+                                </StackPanel>
+                            </StackPanel>
+                        </HierarchicalDataTemplate>
+                        <!-- 09-15-2010 Scott Add -->
+                        <HierarchicalDataTemplate DataType="{x:Type viewmodel:PVFormationViewModel}" ItemsSource="{Binding Children}">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="{Binding Image}" Width="20" Height="20"/>
+                                <TextBlock VerticalAlignment="Center" Text="{Binding Name}"/>
+                            </StackPanel>
+                        </HierarchicalDataTemplate>
+                        <HierarchicalDataTemplate DataType="{x:Type viewmodel:PlayFolderViewModel}" ItemsSource="{Binding Children}">
+                            <StackPanel Orientation="Horizontal" MouseLeftButtonDown="treeFormation_MouseLeftButtonDown">
+                                <Image Source="{Binding Image}" Width="20" Height="20"/>
+                                <TextBlock VerticalAlignment="Center" Text="{Binding Name}"/>
+                            </StackPanel>
+                        </HierarchicalDataTemplate>
+                    </TreeView.Resources>
+                </TreeView>
+            </TabItem>
+        </TabControl>
+
+        <TabControl Grid.Row="0" Grid.Column="1">
+            <TabItem Header="Print">
+                <Grid Margin="5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="30"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <ListBox Grid.Row="0" x:Name="lbSelectedFiles" >
+                        <ListBox.Resources>
+                            <HierarchicalDataTemplate DataType="{x:Type viewmodel:ScoutTypeViewModel}">
+                                <StackPanel Orientation="Horizontal" MouseLeftButtonDown="treeFormation_MouseLeftButtonDown">
+                                    <Image Source="{Binding Path=Image}" Width="20" Height="20" />
+                                    <TextBlock VerticalAlignment="Center" Text="{Binding Path=ScoutTypeName}"/>
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+
+                            <HierarchicalDataTemplate DataType="{x:Type viewmodel:PersonnelViewModel}">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="{Binding Path=Image}" Width="20" Height="20" />
+                                    <TextBlock VerticalAlignment="Center" Text="{Binding Path=PersonnelName}"/>
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+
+                            <HierarchicalDataTemplate DataType="{x:Type viewmodel:FormationViewModel}">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="{Binding Path=Image}" Width="20" Height="20" />
+                                    <TextBlock VerticalAlignment="Center" Text="{Binding Path=FormationName}"/>
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+
+                            <HierarchicalDataTemplate DataType="{x:Type viewmodel:FolderViewModel}">
+                                <StackPanel Orientation="Horizontal" MouseLeftButtonDown="treeFormation_MouseLeftButtonDown">
+                                    <Image Source="{Binding Path=Image}" Width="20" Height="20" />
+                                    <TextBlock VerticalAlignment="Center" Text="{Binding Path=Name}"/>
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+
+                            <HierarchicalDataTemplate DataType="{x:Type viewmodel:PlayViewModel}">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="{Binding Image}" Width="20" Height="20" />
+                                    <TextBlock Text="{Binding PlayName}" VerticalAlignment="Center" />
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                        </ListBox.Resources>
+                    </ListBox>
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Button x:Name="btnRemove" Click="btnRemove_Click" Margin="5">Remove</Button>
+                        <Button x:Name="btnClear" Click="btnClear_Click" Margin="5">Clear</Button>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Margin="5" x:Name="btnPrint" Click="btnPrint_Click">Print</Button>
+            <Button Margin="5" x:Name="btnPrintPreview" Click="btnPrintPreview_Click">Print Preview</Button>
+            <Button Margin="5" x:Name="btnCancel" Click="btnCancel_Click">Cancel</Button>
+        </StackPanel>
+        <Grid x:Name="gridProgress" Grid.RowSpan="10" Grid.ColumnSpan="10" Visibility="Hidden">
+            <ProgressBar x:Name="pBar" Width="300" Height="30"  Background="White" BorderBrush="Gray" Foreground="Red" Minimum="0" Value="0"></ProgressBar>
+            <TextBlock x:Name="pText" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Foreground="SeaGreen"></TextBlock>
+        </Grid>
+    </Grid>
+</Window>

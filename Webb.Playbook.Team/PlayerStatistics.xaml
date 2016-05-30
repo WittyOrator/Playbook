@@ -1,0 +1,62 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	x:Class="Webb.Playbook.Team.PlayerStatistics"
+    xmlns:ds="clr-namespace:Webb.Playbook.Data;assembly=Webb.Playbook.Data"
+	x:Name="UserControl"
+
+	Width="Auto" Height="Auto" Loaded="Window_Loaded"   xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" >
+    <UserControl.Resources>
+        <Style TargetType="Grid">
+            <Setter Property="Background" Value="{DynamicResource StackPanelBackgroundBrush}"/>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{DynamicResource OutsideTextBrush}"/>
+        </Style>
+    </UserControl.Resources>
+    <Border BorderThickness="2" BorderBrush="SteelBlue" Width="Auto" Height="Auto"  IsHitTestVisible="True" AllowDrop="True">
+        <GroupBox Header="Player Statistics">
+            <Grid Width="Auto" Height="Auto" Button.Click="CommonClickHandler" x:Name="gridBinding">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="3*"></RowDefinition>
+                    <RowDefinition Height="2*"></RowDefinition>
+                    <RowDefinition Height="32"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <GroupBox Grid.Row="0" Grid.Column="0" Header="Build" VerticalAlignment="Top"  d:LayoutOverrides="VerticalAlignment" Margin="8,0,8,0">
+                    <Grid Width="218" Height="128">
+                        <TextBlock HorizontalAlignment="Left" Margin="8,9.333,0,0" VerticalAlignment="Top" Width="72" Height="16" TextWrapping="Wrap"><Run Text="Height(ft)"/></TextBlock>
+                        <TextBlock HorizontalAlignment="Left" Margin="8,50.821,0,61.179" Width="80" Height="16" Text="Weight(lbs)" TextWrapping="Wrap"/>
+                        <TextBlock Height="16" VerticalAlignment="Bottom" Margin="8,0,0,18.002" Width="80" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Forty(secs)"/>
+                        <ComboBox IsSynchronizedWithCurrentItem="True" x:Name="cmbHeight"  Text="{Binding Height,Mode=TwoWay,UpdateSourceTrigger=Explicit}" Margin="92,3,17,0" VerticalAlignment="Top" Height="24" IsEditable="True" IsEnabled="True"/>
+                        <TextBox Margin="92,45.063,17,0"  x:Name="txtWeight"  Height="24" Text="{Binding Weight,Mode=TwoWay,UpdateSourceTrigger=Explicit}" TextWrapping="Wrap" VerticalAlignment="Top" />
+                        <TextBox Margin="92,0,17,17.002" x:Name="txtForty" VerticalAlignment="Bottom" Height="24" Text="None" TextWrapping="Wrap"/>
+                    </Grid>
+                </GroupBox>
+                <GroupBox  Grid.Row="0" Grid.Column="1"  Header="Note" d:LayoutOverrides="VerticalAlignment" Margin="0,0,8,0">
+                    <Grid Width="Auto" Height="Auto">
+                        <ScrollViewer Margin="8,9.48,62.585,8" >
+                            <TextBlock Width="Auto" x:Name="txtNote" Text="{Binding Note,Mode =TwoWay,UpdateSourceTrigger=Explicit}" TextWrapping="Wrap"  Height="500"/>
+                        </ScrollViewer>
+                        <Border Margin="8,10.313,77.05,8" BorderThickness="0.5" BorderBrush="SteelBlue" IsEnabled="True"/>
+                        <Button HorizontalAlignment="Right" x:Name="btnNote" Margin="0,10.313,3.335,0" VerticalAlignment="Top" Width="59.25" Height="24" Content="Change..."/>
+                    </Grid>
+                </GroupBox>
+                <GroupBox Grid.Row="1" Grid.Column="0"  Header="Maneuverability" Margin="8,4.495,8,-4.503">
+                    <Grid Width="216" Height="66.843">
+                        <TextBlock HorizontalAlignment="Left" Margin="8,10.313,0,0" VerticalAlignment="Top" Width="80" Height="16" Text="Speed(yd/s)" TextWrapping="Wrap"/>
+                        <TextBlock HorizontalAlignment="Left" Margin="8,0,0,7.687" VerticalAlignment="Bottom" Width="80" Height="16" Text="Acc.(speed/s)" TextWrapping="Wrap"/>
+                        <TextBox Margin="92,4,15,0"  x:Name ="txtSpeed" VerticalAlignment="Top" Height="24" Width="109" Text="Simulator Chosen" TextWrapping="Wrap" IsEnabled="False"/>
+                        <TextBox HorizontalAlignment="Right" x:Name ="txtAcc" Margin="0,0,15,7.687" VerticalAlignment="Bottom" Width="109" Height="24" Text="Simulator Chosen" TextWrapping="Wrap" IsEnabled="False"/>
+                    </Grid>
+                </GroupBox>
+                <Button HorizontalAlignment="Left" x:Name="btnOk" Grid.Row="1" VerticalAlignment="Bottom" Width="80" Height="24" Content="Ok" Margin="26.5,0,0,1" Grid.RowSpan="2" />
+                <Button HorizontalAlignment="Right" x:Name="btnCancel" Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" Width="80" Height="24" Content="Cancel" Margin="0,0,26,1" Grid.RowSpan="2" />
+            </Grid>
+        </GroupBox>
+    </Border>
+</UserControl>

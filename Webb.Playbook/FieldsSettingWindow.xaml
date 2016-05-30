@@ -1,0 +1,79 @@
+﻿<Window x:Class="Webb.Playbook.FieldsSettingWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:data="clr-namespace:Webb.Playbook.Data;assembly=Webb.Playbook.Data"
+    Title="Terminology Settings" Height="400" Width="500"
+    WindowStyle="ToolWindow"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterOwner">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="90"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        
+        <Border Grid.Row="0" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="10" BorderBrush="{DynamicResource NormalBorderBrush}" Margin="2" BorderThickness="2"></Border>
+        <StackPanel VerticalAlignment="Center" Grid.Row="0" Grid.RowSpan="1" Grid.ColumnSpan="2" Orientation="Vertical">
+            <TextBlock Margin="30,5">User Folder:</TextBlock>
+            <StackPanel  Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock x:Name="tbPath" Background="LightGray" Width="350" Grid.Row="0" Grid.RowSpan="1"></TextBlock>
+                <Button Margin="20,0,0,0" x:Name="btnPath" Width="60" Click="btnPath_Click">Browse...</Button>
+            </StackPanel>
+            <StackPanel Margin="30,5" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                <TextBlock VerticalAlignment="Center" Width="70">User Type:</TextBlock>
+                <ComboBox x:Name="cbScoutType" ItemsSource="{data:EnumValuesExtension data:UserTypes}" VerticalAlignment="Center" Width="120"></ComboBox>
+            </StackPanel>
+        </StackPanel>
+
+        <Border Grid.Row="1" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="1" CornerRadius="10" BorderBrush="{DynamicResource NormalBorderBrush}" Margin="2" BorderThickness="2"></Border>   
+        <StackPanel Grid.Row="1" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="1" Orientation="Vertical">
+            <TextBlock Margin="0,15,0,0" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center">Offense</TextBlock>
+            <StackPanel Margin="0,10" HorizontalAlignment="Center" Orientation="Horizontal">
+                <TextBlock Width="70" VerticalAlignment="Center">Main Field:</TextBlock>
+                <ComboBox x:Name="cbOM" Width="150" ItemsSource="{Binding Fields}"></ComboBox>
+            </StackPanel>
+            <StackPanel Margin="0,10" HorizontalAlignment="Center" Orientation="Horizontal">
+                <TextBlock Width="70" VerticalAlignment="Center">Sub Field:</TextBlock>
+                <ComboBox x:Name="cbOS" Width="150" ItemsSource="{Binding Fields}"></ComboBox>
+            </StackPanel>
+        </StackPanel>
+
+        <Border Grid.Row="1" Grid.RowSpan="1" Grid.Column="1" Grid.ColumnSpan="1" CornerRadius="10" BorderBrush="{DynamicResource NormalBorderBrush}" Margin="2" BorderThickness="2"></Border>
+        <StackPanel Grid.Row="1" Grid.RowSpan="1" Grid.Column="1" Grid.ColumnSpan="1" Orientation="Vertical">
+            <TextBlock Margin="0,15,0,0" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center">Defense</TextBlock>
+            <StackPanel Margin="0,10" HorizontalAlignment="Center" Orientation="Horizontal">
+                <TextBlock Width="70" VerticalAlignment="Center">Main Field:</TextBlock>
+                <ComboBox x:Name="cbDM" Width="150" ItemsSource="{Binding Fields}"></ComboBox>
+            </StackPanel>
+            <StackPanel Margin="0,10" HorizontalAlignment="Center" Orientation="Horizontal">
+                <TextBlock Width="70" VerticalAlignment="Center">Sub Field:</TextBlock>
+                <ComboBox x:Name="cbDS" Width="150" ItemsSource="{Binding Fields}"></ComboBox>
+            </StackPanel>
+        </StackPanel>
+        
+        <Border Grid.Row="2" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="1" CornerRadius="10" BorderBrush="{DynamicResource NormalBorderBrush}" Margin="2" BorderThickness="2"></Border>
+        <StackPanel Grid.Row="2" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="1" Orientation="Vertical">
+            <TextBlock Margin="0,15,0,0" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center">Special Teams</TextBlock>
+            <StackPanel Margin="0,10" HorizontalAlignment="Center" Orientation="Horizontal">
+                <TextBlock Width="70" VerticalAlignment="Center">Main Field:</TextBlock>
+                <ComboBox x:Name="cbKM" Width="150" ItemsSource="{Binding Fields}"></ComboBox>
+            </StackPanel>
+            <StackPanel Margin="0,10" HorizontalAlignment="Center" Orientation="Horizontal">
+                <TextBlock Width="70" VerticalAlignment="Center">Sub Field:</TextBlock>
+                <ComboBox x:Name="cbKS" Width="150" ItemsSource="{Binding Fields}"></ComboBox>
+            </StackPanel>
+        </StackPanel>
+        
+        <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button x:Name="OK" Margin="10,0" Width="80" Click="OK_Click">OK</Button>
+            <Button x:Name="Cancel" Margin="10,0" Width="80" Click="Cancel_Click">Cancel</Button>
+        </StackPanel>
+    </Grid>
+</Window>

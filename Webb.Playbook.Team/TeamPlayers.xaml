@@ -1,0 +1,50 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	x:Class="Webb.Playbook.Team.TeamPlayers"
+  xmlns:ds="clr-namespace:Webb.Playbook.Data;assembly=Webb.Playbook.Data"
+	x:Name="UserControl"
+   Width="Auto" Height="Auto"  Loaded="Window_Loaded"  xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" d:DesignWidth="496" >
+
+    <UserControl.Resources>
+        <Style TargetType="Grid">
+            <Setter Property="Background" Value="{DynamicResource StackPanelBackgroundBrush}"/>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{DynamicResource OutsideTextBrush}"/>
+        </Style>
+    </UserControl.Resources>
+    <Border BorderThickness="2" BorderBrush="SteelBlue" Width="Auto" Height="Auto"  IsHitTestVisible="True" AllowDrop="True">
+        <GroupBox x:Name="gpboxTeamPlayers"  Header="">
+            <Grid Width="Auto" Height="Auto" Button.Click ="CommonClickHandler">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="6*"></ColumnDefinition>
+                    <ColumnDefinition Width="5*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <ListBox IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding Path=Players, Mode =TwoWay}" x:Name ="lstPlayer"  Grid.Column="0"  Width="Auto"  AllowDrop="True" Margin="5.6,8,40.764,8">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock>
+                            <TextBlock Text="{Binding Path= Name }"/>
+                            <TextBlock Text="("/>
+                            <TextBlock Text="{Binding Path= ID}"/>
+                            <TextBlock Text=")"/>
+                           </TextBlock>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+                <StackPanel Grid.Column="1" Margin="8,0,8,0">
+                    <Grid Height="Auto">
+                        <Button HorizontalAlignment="Center" x:Name="btnEdPlayer" Margin="0,14,26,0" VerticalAlignment="Top" Width="160" Height="24" Content="Edit Player"/>
+                        <Button HorizontalAlignment="Center" x:Name="btnCrPlayer" Margin="0,53,26,0" VerticalAlignment="Top" Width="160" Height="24" Content="Create Player"/>
+                        <Button HorizontalAlignment="Center" x:Name="btnCoPlayer" Margin="0,92,26,0" VerticalAlignment="Top" Width="160" Height="24" Content="Copy Player"/>
+                        <Button HorizontalAlignment="Center" x:Name="btnDePlayer" Margin="0,138.75,26,131.25" Width="160" Height="24" Content="Delete Player"/>
+                        <Button HorizontalAlignment="Center" x:Name ="btnViwTeSta" Margin="0,0,26,84" VerticalAlignment="Bottom" Width="160" Height="24" Content="View Team Stats"/>
+                        <Button x:Name="btnClose" Margin="0,0,26,16" Height="24" Width="160"  Content="Close" VerticalAlignment="Bottom" />
+                    </Grid>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+    </Border>
+</UserControl>

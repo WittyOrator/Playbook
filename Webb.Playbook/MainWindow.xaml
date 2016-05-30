@@ -1,0 +1,569 @@
+﻿<Window x:Class="Webb.Playbook.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:toolkit="clr-namespace:Microsoft.Windows.Controls;assembly=WPFToolkit"
+    xmlns:geo="clr-namespace:System.Windows.Media;assembly=WindowsBase"
+    xmlns:viewmodel="clr-namespace:Webb.Playbook.ViewModel"
+    xmlns:local="clr-namespace:Webb.Playbook"
+    xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+    xmlns:cols="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+    xmlns:data="clr-namespace:Webb.Playbook.Data;assembly=Webb.Playbook.Data"
+    Title="Webb Playbook"
+    WindowStartupLocation="CenterScreen"
+    MinWidth="1024" MinHeight="700"
+    Width="1024" Height="700"
+    KeyUp="Window_KeyUp" Loaded="Window_Loaded" 
+    xmlns:Microsoft_Windows_Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Classic" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    mc:Ignorable="d" 
+    Background="Green" Icon="/Playbook;component/Resource/Main.ico"
+    WindowStyle="SingleBorderWindow">
+    <Window.Resources>
+        <data:BooleanBrushConverter x:Key="BooleanBrushConverter" />
+
+        <data:EnumBooleanConverter x:Key="EnumBooleanConverter" />
+
+        <Style TargetType="StackPanel">
+            <Setter Property="Background" Value="{DynamicResource StackPanelBackgroundBrush}"/>
+        </Style>
+
+        <DataTemplate x:Key="PositionListTemplate" DataType="{x:Type data:Personnel}">
+            <TextBlock Margin="0,2" Text="{Binding Value}" FontSize="20" Foreground="Gray" TextAlignment="Left"></TextBlock>
+        </DataTemplate>
+
+        <DataTemplate x:Key="ListBoxTemplate" DataType="{x:Type local:Tool}">
+            <Grid Height="16" ToolTip="{Binding ToolTip}" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0" Margin="0,0,5,0" Source="{Binding Image}"/>
+                <TextBlock Grid.Column="1" Margin="0,0,5,0" Width="120" Text="{Binding Text}" VerticalAlignment="Center"/>
+                <StackPanel Grid.Column="2" Margin="0,0,0,0" HorizontalAlignment="Right" Orientation="Horizontal" VerticalAlignment="Center">
+                    <ListBoxItem Background="Transparent" BorderBrush="Transparent" Height="16" Width="16" VerticalAlignment="Center" Visibility="{Binding VisibilityDelete}" MouseLeftButtonUp="ListBoxItem_MouseLeftButtonUp">
+                        <Image Source="Resource\Clear.png"></Image>
+                    </ListBoxItem>
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+    </Window.Resources>
+
+    <Grid Name="gridMain" Width="Auto" Height="Auto" SizeChanged="Grid_SizeChanged">
+        <Grid.Resources>
+            <Style TargetType="{x:Type Button}">
+                <Setter Property="Width" Value="50" />
+                <Setter Property="Height" Value="Auto" />
+                <Setter Property="Margin" Value="5,5,0,5" />
+            </Style>
+        </Grid.Resources>
+
+        <Grid.RowDefinitions>
+            <RowDefinition x:Name="rowTitle" Height="0" />
+            <RowDefinition Height="25" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="240" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Name="ToolPanelColumn" Width="200"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid x:Name="gridTitle" Grid.Row="0" Grid.ColumnSpan="100"></Grid>
+        <Grid Grid.Row="1" Grid.RowSpan="1" Grid.ColumnSpan="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Menu x:Name="menuMain" Grid.Column="1">
+                <MenuItem x:Name="menuFile" Header="File">
+                    <MenuItem Header="New" Click="File_New_Click"/>
+                    <MenuItem Header="New Folder" Click="File_NewFolder_Click"/>
+                    <MenuItem Header="Save" Click="File_Save_Click"/>
+                    <MenuItem Header="Save As" Click="File_SaveAs_Click"/>
+                    <MenuItem Header="Rename" Click="File_Rename_Click"/>
+                    <MenuItem Header="Delete" Click="File_Delete_Click"/>
+                    <MenuItem Header="Close" Click="File_Close_Click" />
+                    <Separator></Separator>
+                    <MenuItem Header="Import Drawings From File" Click="Import_Games_Click"/>
+                    <MenuItem Header="Export Drawings To File" Click="Export_Games_Click"/>
+                    <Separator></Separator>
+                    <MenuItem Header="Print" x:Name="miPrint" Click="miPrint_Click"></MenuItem>
+                    <MenuItem Header="Print Preview" x:Name="miPrintPreview" Click="miPrintPreview_Click"></MenuItem>
+                    <MenuItem Header="Print Multiple Drawings" x:Name="miPrintMany" Click="miPrintMany_Click"></MenuItem>
+                    <MenuItem Header="Print Setup" x:Name="miPrintSetup">
+                        <MenuItem Header="Print Setup" x:Name="miGameSetup" Click="miGameSetup_Click"></MenuItem>
+                        <MenuItem Header="Page Setup" x:Name="miPageSetup" Click="miPageSetup_Click"></MenuItem>
+                    </MenuItem>
+                    <MenuItem Header="Report..." x:Name="miReport" Click="miReport_Click"></MenuItem>
+                    <Separator></Separator>
+                    <MenuItem Header="Save to image w/ Background" Click="btnSaveToImageField_Click"/>
+                    <MenuItem Header="Save to image w/o Background" Click="btnSaveToImage_Click"/>
+                    <MenuItem Header="Save to Advantage diagram w/ Background" Click="btnSaveToDiagramField_Click"/>
+                    <MenuItem Header="Save to Advantage diagram w/o Background" Click="btnSaveToDiagram_Click"/>
+                    <Separator></Separator>
+                    <MenuItem Header="Exit Playbook" Click="btnClose_Click"/>
+                </MenuItem>
+                <MenuItem x:Name="menuEdit" Header="Edit" SubmenuOpened="menuEdit_SubmenuOpened">
+                    <!--<MenuItem Header="Delete" Click="btnDelete_Click"/>-->
+                    <MenuItem Header="Undo" Click="btnUndo_Click"/>
+                    <MenuItem Header="Redo" Click="btnRedo_Click"/>
+                    <Separator/>
+                    <MenuItem Header="HReverse">
+                        <MenuItem Header="HReverse" Click="btnHReverse_Click"/>
+                        <MenuItem Header="OffHReverse" Click="btnOffHReverse"/>
+                        <MenuItem Header="DefHReverse" Click="btnDefHReverse"/>
+                    </MenuItem>
+                    <MenuItem Header="VReverse" >
+                        <MenuItem Header="VReverse" Click="btnVReverse_Click"/>
+                        <!--<MenuItem Header="OffVReverse" Click="btnOffVReverse"/>
+                    <MenuItem Header="DefVReverse" Click="btnDefVReverse"/>-->
+                    </MenuItem>
+                    <Separator/>
+                </MenuItem>
+                <MenuItem Header="Settings">
+                    <MenuItem Header="Configuration Settings..." Click="btnConfig_Click"/>
+                    <MenuItem Header="Terminology Settings..." Click="MenuItem_Field_Click"></MenuItem>
+                    <MenuItem Header="Automatic Picture Settings..." Click="Automatic_Picture_Click"></MenuItem>
+                    <MenuItem Header="Color Settings..." Click="MenuItem_Color_Click"></MenuItem>
+                    <MenuItem Header="Player Settings" x:Name="miPlayerSettings"></MenuItem>
+                    <Separator/>
+                    <MenuItem Header="Team Editor..." Click="btnTeam_Click" IsEnabled="False"/>
+                    <MenuItem Header="Call Editor..." Click="btnCall_Click" IsEnabled="False"/>
+                    <MenuItem Header="Personnel Editor..." Click="btnPersonnel_Click"/>
+                    <Separator Visibility="Collapsed"/>
+                    <StackPanel Visibility="Collapsed"  Background="Transparent" Orientation="Vertical">
+                        <TextBlock Text="Our Team Type:" Foreground="{DynamicResource TextBrush}"></TextBlock>
+                        <StackPanel Background="Transparent" Orientation="Horizontal">
+                            <RadioButton Name="radioOffensive" IsChecked="{Binding Source={x:Static data:GameSetting.Instance},Path=OurTeamScoutType,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource EnumBooleanConverter}, ConverterParameter=Offensive}">Offensive</RadioButton>
+                            <RadioButton Name="radioDefensive" IsChecked="{Binding Source={x:Static data:GameSetting.Instance},Path=OurTeamScoutType,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource EnumBooleanConverter}, ConverterParameter=Defensive}" Margin="5,0,0,0">Defensive</RadioButton>
+                        </StackPanel>
+                    </StackPanel>
+                </MenuItem>
+
+                <MenuItem Header="Themes" Name="menuItemThemes">
+
+                </MenuItem>
+
+                <!--<MenuItem Header="3D View">
+                    <MenuItem Header="Open 3D View" Click="btnOpenGame_Click" />
+                    <MenuItem Header="Close 3D View" Click="btnCloseGame_Click" />
+                </MenuItem>-->
+                <MenuItem x:Name="miHelp" Header="Help">
+                    <MenuItem Header="About" Click="About_Click"/>
+                    <MenuItem Header="Help Topics" Click="HelpTopics_Click"/>
+                    <MenuItem x:Name="miHelpVideos" Header="Help Videos" Click="HelpVideos_Click"/>
+                </MenuItem>
+
+            </Menu>
+        </Grid>
+
+        <Grid x:Name="gridTools" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2" Grid.RowSpan="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="200"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            
+            <ToolBarTray x:Name="toolbarTray" Grid.Row="0" Grid.ColumnSpan="1">
+                <ToolBar Width="Auto" Height="Auto"  x:Name="toolbarMain">
+                    <ToolBar.ItemTemplate>
+                        <DataTemplate>
+                            <Button Background="{DynamicResource NormalBrush}" ToolTip="{Binding ToolTip}" Width="Auto" Height="Auto"
+                            Click="Button_Click"
+                            Tag="{Binding}" Margin="0" >
+                                <Grid>
+                                    <Image Width="30" Height="30" Source="{Binding Image}"></Image>
+                                    <Image Width="30" Height="30" Source="/Playbook;component/Resource/Disabled.png" Visibility="{Binding VisibilityEnableIcon}"></Image>
+                                </Grid>
+                            </Button>
+                        </DataTemplate>
+                    </ToolBar.ItemTemplate>
+                </ToolBar>
+                <ToolBar Width="Auto" Height="Auto" x:Name="toolbarHReverse" Visibility="Collapsed">
+                    <ToolBar.ItemTemplate>
+                        <DataTemplate>
+                            <Button Background="{DynamicResource NormalBrush}" ToolTip="{Binding ToolTip}" Width="Auto" Height="Auto"
+                            Click="Button_Click"
+                            Tag="{Binding}" Margin="0">
+                                <Grid>
+                                    <Image Width="30" Height="30" Source="{Binding Image}"></Image>
+                                    <Image Width="30" Height="30" Source="/Playbook;component/Resource/Disabled.png" Visibility="{Binding VisibilityEnableIcon}"></Image>
+                                </Grid>
+                            </Button>
+                        </DataTemplate>
+                    </ToolBar.ItemTemplate>
+                </ToolBar>
+                <ToolBar Width="Auto" Height="Auto" x:Name="toolbar2D3D">
+                    <ToolBar.ItemTemplate>
+                        <DataTemplate>
+                            <Button Background="{DynamicResource NormalBrush}" ToolTip="{Binding ToolTip}" Width="Auto" Height="Auto"
+                            Click="Button_Click"
+                            Tag="{Binding}" Margin="0">
+                                <Grid>
+                                    <Image Width="30" Height="30" Source="{Binding Image}"></Image>
+                                    <Image Width="30" Height="30" Source="/Playbook;component/Resource/Disabled.png" Visibility="{Binding VisibilityEnableIcon}"></Image>
+                                </Grid>
+                            </Button>
+                        </DataTemplate>
+                    </ToolBar.ItemTemplate>
+                </ToolBar>
+                <ToolBar Width="Auto" Height="Auto" x:Name="toolbarBaseFormation" Visibility="Collapsed">
+                    <ToolBar.ItemTemplate>
+                        <DataTemplate>
+                            <Button Background="{DynamicResource NormalBrush}" ToolTip="{Binding ToolTip}" Width="Auto" Height="Auto"
+                            Click="Button_Click"
+                            Tag="{Binding}" Margin="0">
+                                <Grid>
+                                    <Image Width="30" Height="30" Source="{Binding Image}"></Image>
+                                    <Image Width="30" Height="30" Source="/Playbook;component/Resource/Disabled.png" Visibility="{Binding VisibilityEnableIcon}"></Image>
+                                </Grid>
+                            </Button>
+                        </DataTemplate>
+                    </ToolBar.ItemTemplate>
+                </ToolBar>
+            </ToolBarTray>
+            <ToolBarTray x:Name="toolbarTrayDrawing" Grid.Row="1" Visibility="Collapsed" Grid.ColumnSpan="2">
+                <ToolBar Width="Auto" Height="Auto" x:Name="toolbarDrawingMode">
+                    <ToolBar.ItemTemplate>
+                        <DataTemplate>
+                            <Button Background="{DynamicResource NormalBrush}" ToolTip="{Binding ToolTip}" Width="Auto" Height="Auto"
+                            Click="Button_Click"
+                            Tag="{Binding}" Margin="0" BorderThickness="2" BorderBrush="{Binding Path=Checked,Mode=TwoWay,Converter={StaticResource BooleanBrushConverter}}" >
+                                <Image Width="20" Height="20" Source="{Binding Image}"></Image>
+                            </Button>
+                        </DataTemplate>
+                    </ToolBar.ItemTemplate>
+                </ToolBar>
+                <ToolBar Width="Auto" Height="Auto" x:Name="toolbarLineType">
+                    <ToolBar.ItemTemplate>
+                        <DataTemplate>
+                            <Button Background="{DynamicResource NormalBrush}" ToolTip="{Binding ToolTip}" Width="Auto" Height="Auto"
+                            Click="Button_Click"
+                            Tag="{Binding}" Margin="0" BorderThickness="2" BorderBrush="{Binding Path=Checked,Mode=TwoWay,Converter={StaticResource BooleanBrushConverter}}" >
+                                <Image Width="20" Height="20" Source="{Binding Image}"></Image>
+                            </Button>
+                        </DataTemplate>
+                    </ToolBar.ItemTemplate>
+                </ToolBar>
+                <ToolBar Width="Auto" Height="Auto" x:Name="toolbarDashType">
+                    <ToolBar.ItemTemplate>
+                        <DataTemplate>
+                            <Button Background="{DynamicResource NormalBrush}" ToolTip="{Binding ToolTip}" Width="Auto" Height="Auto"
+                            Click="Button_Click"
+                            Tag="{Binding}" Margin="0" BorderThickness="2" BorderBrush="{Binding Path=Checked,Mode=TwoWay,Converter={StaticResource BooleanBrushConverter}}" >
+                                <Image Width="20" Height="20" Source="{Binding Image}"></Image>
+                            </Button>
+                        </DataTemplate>
+                    </ToolBar.ItemTemplate>
+                </ToolBar>
+                <ToolBar Width="Auto" Height="Auto" x:Name="toolbarCapType">
+                    <ToolBar.ItemTemplate>
+                        <DataTemplate>
+                            <Button Background="{DynamicResource NormalBrush}" ToolTip="{Binding ToolTip}" Width="Auto" Height="Auto"
+                            Click="Button_Click"
+                            Tag="{Binding}" Margin="0" BorderThickness="2" BorderBrush="{Binding Path=Checked,Mode=TwoWay,Converter={StaticResource BooleanBrushConverter}}" >
+                                <Image Width="20" Height="20" Source="{Binding Image}"></Image>
+
+                            </Button>
+                        </DataTemplate>
+                    </ToolBar.ItemTemplate>
+                </ToolBar>
+                <ToolBar Width="Auto" Height="Auto" x:Name="toolbarColors">
+                    <ToolBar.ItemTemplate>
+                        <DataTemplate>
+                            <Button Background="{DynamicResource NormalBrush}" ToolTip="{Binding ToolTip}" Width="Auto" Height="Auto"
+                            Click="Button_Click"
+                            Tag="{Binding}" Margin="0" BorderThickness="2" BorderBrush="{Binding Path=Checked,Mode=TwoWay,Converter={StaticResource BooleanBrushConverter}}" >
+                                <Grid Background="Transparent" >
+                                    <Border Margin="1" Background="{Binding Color}" BorderBrush="{DynamicResource OutsideTextBrush}" BorderThickness="1"></Border>
+                                    <Image Width="20" Height="20"></Image>
+                                </Grid>
+                            </Button>
+                        </DataTemplate>
+                    </ToolBar.ItemTemplate>
+                </ToolBar>
+            </ToolBarTray>
+            
+            <Image x:Name="imgLogo" Grid.Column="1" Grid.ColumnSpan="1" Grid.Row="0" Grid.RowSpan="1" Source="/Playbook;component/Resource/logo.PNG" Margin="1" Cursor="Hand" ToolTip="Visit Webb Electronics" MouseLeftButtonUp="imgLogo_MouseLeftButtonUp"></Image>
+            
+        </Grid>
+
+        <Grid x:Name="gridPlayGround" Grid.Column="1" Grid.ColumnSpan="1" Grid.Row="3" Grid.RowSpan="1" SizeChanged="Window_SizeChanged">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <!--drawing area-->
+
+            <Grid x:Name="gridDrawing" Grid.IsSharedSizeScope="False">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="{DynamicResource TabHeaderHeight}"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <TabControl x:Name="tabDrawing" Grid.Row="0" Grid.RowSpan="3" TabStripPlacement="Top" Height="Auto" Width="Auto">
+                    <TabItem x:Name="tabMain" Header="     " MouseDoubleClick="tabMain_MouseDoubleClick"></TabItem>
+                </TabControl>
+                <ToolBar Margin="0,0,3,0" Grid.Row="1" Height="40" >
+                    <StackPanel Background="Transparent" Orientation="Horizontal">
+                        <TextBlock VerticalAlignment="Center" Text="50%"></TextBlock>
+                        <Slider  Value="{Binding Source={x:Static data:GameSetting.Instance},Path=Scaling,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Width="300" VerticalAlignment="Center" IsSnapToTickEnabled="True" TickPlacement="TopLeft" TickFrequency="25" Minimum="50" Maximum="600" ToolTip="Size" ValueChanged="Slider_ValueChanged"></Slider>
+                        <TextBlock VerticalAlignment="Center" Text="600%"></TextBlock>
+                        <Button Margin="5,0" Width="24" Height="24" VerticalAlignment="Center" ToolTip="Drag Playground" x:Name="btnDragPlayground" Click="btnDragPlayground_Click">
+                            <Image Source="/Playbook;component/Resource/Drag Playground.png">
+
+                            </Image>
+                        </Button>
+                        <Button Margin="5,0" Width="24" Height="24" VerticalAlignment="Center" ToolTip="Free Draw" x:Name="btnFreeDraw" Click="btnFreeDraw_Click">
+                            <Image x:Name="imgFreeDraw" Source="/Playbook;component/Resource/Pen.png">
+
+                            </Image>
+                        </Button>
+                    </StackPanel>
+                </ToolBar>
+                <Grid x:Name="gridDrawingContainer" Grid.Row="2" Margin="20,5" Loaded="gridDrawingContainer_Loaded" SizeChanged="gridDrawingContainer_SizeChanged" >
+                    <Border Background="White"></Border>
+                    
+                    <Canvas x:Name="canvasDrawing" Loaded="canvasDrawing_Loaded" MouseLeftButtonUp="canvasDrawing_MouseLeftButtonUp">
+                    </Canvas>
+                    
+                    <Canvas x:Name="canvasOutLine" Panel.ZIndex="-1" Background="Transparent" MouseMove="canvasOutLine_MouseMove" MouseLeftButtonDown="canvasOutLine_MouseLeftButtonDown" MouseRightButtonDown="canvasOutLine_MouseRightButtonDown">
+                    </Canvas>
+                </Grid>
+                <Border Grid.Row="2" Panel.ZIndex="100" Background="White" Name="borderFormation" Margin="50,10,50,20" VerticalAlignment="Top" CornerRadius="10,10,10,10" BorderBrush="Gray" BorderThickness="1" Visibility="Collapsed">
+                    <TextBlock Name="textFormation" TextAlignment="Center" FontSize="30" TextWrapping="Wrap"  Foreground="Gray" Text="{Binding Name}"></TextBlock>
+                </Border>
+            </Grid>
+
+            <!--drawing area-->
+            <Grid x:Name="gridPlayerInfo" Height="50" Background="{DynamicResource StackPanelBackgroundBrush}" Grid.Row="1">
+                <TextBlock x:Name="tbPlayerInfo" HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource OutsideTextBrush}"></TextBlock>
+            </Grid>
+            <StackPanel Grid.RowSpan="2" Panel.ZIndex="101" Visibility="Hidden" Background="AliceBlue" Name="stackPanelDisplay" Orientation="Vertical">
+                <Border Background="White" Name="borderTitle" Margin="50,50,50,20" VerticalAlignment="Top" CornerRadius="20,20,20,20" BorderBrush="Gray" BorderThickness="1" >
+                    <TextBlock Name="textTitle" TextAlignment="Center" FontSize="50" TextWrapping="Wrap" Foreground="Gray" Text="{Binding Name}"></TextBlock>
+                </Border>
+                <StackPanel Background="Transparent" Orientation="Vertical" Margin="90,0,0,0" Width="120">
+                    <ItemsControl ItemTemplate="{StaticResource PositionListTemplate}" ItemsSource="{Binding Positions}">
+                    </ItemsControl>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="3" Grid.RowSpan="1" Height="Auto" Width="Auto">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*">
+                </RowDefinition>
+                <RowDefinition Height="0">
+                </RowDefinition>
+            </Grid.RowDefinitions>
+            <TabControl Name="tabControl" TabStripPlacement="Left" Height="Auto" Width="Auto" SelectionChanged="tabControl_SelectionChanged">
+                <TabItem Header="Play Book">
+                    <TreeView ContextMenuOpening="contextMenuOpening" ContextMenu="{DynamicResource FormationContextMenu}" x:Name="treeFormation" ItemsSource="{Binding ScoutTypes}" MouseDoubleClick="treeFormation_MouseDoubleClick" MouseMove="treeFormation_MouseMove" DragDrop.DragOver="treeFormation_DragOver" SelectedItemChanged="treeFormation_SelectedItemChanged" AllowDrop="True">
+                        <TreeView.Resources>
+                            <ContextMenu x:Key="FormationContextMenu" ItemsSource="{Binding Menu}" MenuItem.Click="contextItem_Click">
+                            </ContextMenu>
+
+                            <HierarchicalDataTemplate DataType="{x:Type viewmodel:ScoutTypeViewModel}" ItemsSource="{Binding Path=Children}">
+                                <StackPanel Orientation="Horizontal" AllowDrop="True" DragDrop.Drop="StackPanel_Drop" MouseLeftButtonDown="StackPanel_MouseLeftButtonDown" MouseRightButtonDown="StackPanel_MouseRightButtonDown" >
+                                    <Image Source="{Binding Image}" Width="20" Height="20"/>
+                                    <TextBlock VerticalAlignment="Center" Text="{Binding ScoutTypeName}"/>
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+
+                            <HierarchicalDataTemplate DataType="{x:Type viewmodel:TitleViewModel}">
+                                <StackPanel Orientation="Horizontal" MouseMove="StackPanel_MouseMove" MouseLeftButtonDown="StackPanel_MouseLeftButtonDown" MouseRightButtonDown="StackPanel_MouseRightButtonDown" >
+                                    <Image Source="{Binding Image}" Width="20" Height="20"/>
+                                    <TextBlock VerticalAlignment="Center" Text="{Binding TitleName}"/>
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                            
+                            <HierarchicalDataTemplate DataType="{x:Type viewmodel:FormationViewModel}" ItemsSource="{Binding Children}">
+                                <StackPanel ToolTip="{Binding ToolTip}" Orientation="Horizontal" MouseMove="StackPanel_MouseMove" MouseLeftButtonDown="StackPanel_MouseLeftButtonDown" MouseRightButtonDown="StackPanel_MouseRightButtonDown" >
+                                    <Image Source="{Binding Image}" Width="20" Height="20"/>
+                                    <TextBlock VerticalAlignment="Center" Text="{Binding FormationName}"/>
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+
+                            <HierarchicalDataTemplate DataType="{x:Type viewmodel:PlayViewModel}" ItemsSource="{Binding Path=Children}">
+                                <StackPanel ToolTip="{Binding ToolTip}"  Orientation="Horizontal" MouseLeftButtonDown="StackPanel_MouseLeftButtonDown"  MouseRightButtonDown="StackPanel_MouseRightButtonDown" >
+                                    <Image Source="{Binding Image}" Width="20" Height="20" />
+                                    <TextBlock Text="{Binding PlayName}" VerticalAlignment="Center" />
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+
+                            <HierarchicalDataTemplate DataType="{x:Type viewmodel:PersonnelViewModel}" ItemsSource="{Binding Path=Children}">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="{Binding Image}" Width="20" Height="20"/>
+                                    <TextBlock VerticalAlignment="Center" Text="{Binding PersonnelName}"/>
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+
+                            <HierarchicalDataTemplate DataType="{x:Type viewmodel:FolderViewModel}" ItemsSource="{Binding Children}">
+                                <StackPanel Orientation="Horizontal" MouseMove="StackPanel_MouseMove" AllowDrop="True" DragDrop.Drop="StackPanel_Drop" MouseLeftButtonDown="StackPanel_MouseLeftButtonDown" MouseRightButtonDown="StackPanel_MouseRightButtonDown" >
+                                    <Image Source="{Binding Image}" Width="20" Height="20"/>
+                                    <TextBlock VerticalAlignment="Center" Text="{Binding Name}"/>
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                        </TreeView.Resources>
+                    </TreeView>
+                </TabItem>
+                <TabItem Header="Adjustment" Visibility="Collapsed" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <TreeView x:Name="treeAdjustment" ContextMenuOpening="contextMenuOpening" ContextMenu="{DynamicResource AdjustmentContextMenu}" ItemsSource="{Binding ScoutTypes}">
+                        <TreeView.Resources>
+                            <!--09-03-2010 Scott-->
+                            <ContextMenu x:Key="AdjustmentContextMenu" ItemsSource="{Binding Menu}" MenuItem.Click="contextItem_Click"/>
+                            <!--08-27-2010 Scott-->
+                            <HierarchicalDataTemplate DataType="{x:Type viewmodel:ScoutTypeViewModel}" ItemsSource="{Binding Path=Children}">
+                                <StackPanel Orientation="Horizontal" AllowDrop="True" MouseLeftButtonDown="StackPanel_MouseLeftButtonDown" MouseRightButtonDown="StackPanel_MouseRightButtonDown" >
+                                    <Image Source="{Binding Image}" Width="20" Height="20"/>
+                                    <TextBlock VerticalAlignment="Center" Text="{Binding ScoutTypeName}"/>
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                            <HierarchicalDataTemplate DataType="{x:Type viewmodel:AdjustmentTypeViewModel}" ItemsSource="{Binding Path=Children}">
+                                <StackPanel Orientation="Horizontal" AllowDrop="False" MouseLeftButtonDown="StackPanel_MouseLeftButtonDown" MouseRightButtonDown="StackPanel_MouseRightButtonDown" >
+                                    <Image Source="{Binding Image}" Width="20" Height="20"/>
+                                    <TextBlock VerticalAlignment="Center" Text="{Binding Name}"/>
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                            <HierarchicalDataTemplate DataType="{x:Type viewmodel:AdjustmentViewModel}" ItemsSource="{Binding Path=Children}">
+                                <StackPanel Orientation="Horizontal" AllowDrop="False" MouseLeftButtonDown="StackPanel_MouseLeftButtonDown" MouseRightButtonDown="StackPanel_MouseRightButtonDown" >
+                                    <Image Source="{Binding Image}" Width="20" Height="20"/>
+                                    <TextBlock VerticalAlignment="Center" Text="{Binding Name}"/>
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                            <HierarchicalDataTemplate DataType="{x:Type viewmodel:PlayViewModel}" ItemsSource="{Binding Path=Children}">
+                                <StackPanel ToolTip="{Binding ToolTip}" Orientation="Horizontal" MouseLeftButtonDown="StackPanel_MouseLeftButtonDown" MouseRightButtonDown="StackPanel_MouseRightButtonDown" >
+                                    <Image Source="{Binding Image}" Width="20" Height="20" />
+                                    <TextBlock Text="{Binding PlayName}" VerticalAlignment="Center" />
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                        </TreeView.Resources>
+                    </TreeView>
+                </TabItem>
+                <TabItem Header="Game Plan" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="0"></RowDefinition>
+                            <!--10-14-2010 Set 0 by Scott-->
+                        </Grid.RowDefinitions>
+
+                        <TreeView x:Name="treePlaybook" Panel.ZIndex="1" Grid.Row="0" ContextMenuOpening="contextMenuOpening" ContextMenu="{DynamicResource PlaybookContextMenu}"  ItemsSource="{Binding PlayTypes}" MouseDoubleClick="treePlaybook_MouseDoubleClick" MouseMove="treePlaybook_MouseMove" SelectedItemChanged="treePlaybook_SelectedItemChanged">
+                            <TreeView.Resources>
+                                <ContextMenu x:Key="PlaybookContextMenu" ItemsSource="{Binding Menu}" MenuItem.Click="contextItem_Click">
+                                </ContextMenu>
+                                <HierarchicalDataTemplate DataType="{x:Type viewmodel:PlayTypeViewModel}" ItemsSource="{Binding Path=Children}">
+                                    <StackPanel Orientation="Horizontal" AllowDrop="True" DragDrop.Drop="StackPanel_Drop" MouseLeftButtonDown="StackPanel_MouseLeftButtonDown" MouseRightButtonDown="StackPanel_MouseRightButtonDown" >
+                                        <Image Source="{Binding Image}" Width="20" Height="20" />
+                                        <TextBlock Text="{Binding PlayTypeName}" VerticalAlignment="Center" />
+                                    </StackPanel>
+                                </HierarchicalDataTemplate>
+                                <HierarchicalDataTemplate DataType="{x:Type viewmodel:PlayViewModel}" ItemsSource="{Binding Path=Children}">
+                                    <StackPanel ToolTip="{Binding ToolTip}" Orientation="Vertical" MouseMove="StackPanel_MouseMove" MouseLeftButtonDown="StackPanel_MouseLeftButtonDown"  MouseRightButtonDown="StackPanel_MouseRightButtonDown" >
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image Source="{Binding Image}" Width="20" Height="20" />
+                                            <TextBlock Text="{Binding PlayName}" VerticalAlignment="Center" />
+                                        </StackPanel>
+                                        <!-- 09-15-2010 Scott Delete -->
+                                        <!--<StackPanel x:Name="spOffense" Margin="20,0,0,0" Orientation="Horizontal">
+                                        <Image Source="{Binding OffensiveImage}" Width="20" Height="20" />
+                                        <TextBlock Text="{Binding OffensiveFormation}" VerticalAlignment="Center" />
+                                    </StackPanel>
+                                    <StackPanel x:Name="spDefense" Margin="20,0,0,0" Orientation="Horizontal">
+                                        <Image Source="{Binding DefensiveImage}" Width="20" Height="20" />
+                                        <TextBlock Text="{Binding DefensiveFormation}" VerticalAlignment="Center" />
+                                    </StackPanel>-->
+                                    </StackPanel>
+                                </HierarchicalDataTemplate>
+                                <!-- 09-15-2010 Scott Add -->
+                                <HierarchicalDataTemplate DataType="{x:Type viewmodel:PVFormationViewModel}" ItemsSource="{Binding Children}">
+                                    <StackPanel Orientation="Horizontal" MouseLeftButtonDown="StackPanel_MouseLeftButtonDown"  MouseRightButtonDown="StackPanel_MouseRightButtonDown" >
+                                        <Image Source="{Binding Image}" Width="20" Height="20"/>
+                                        <TextBlock VerticalAlignment="Center" Text="{Binding Name}"/>
+                                    </StackPanel>
+                                </HierarchicalDataTemplate>
+                                <HierarchicalDataTemplate DataType="{x:Type viewmodel:PlayFolderViewModel}" ItemsSource="{Binding Children}">
+                                    <StackPanel Orientation="Horizontal" MouseMove="StackPanel_MouseMove" AllowDrop="True" DragDrop.Drop="StackPanel_Drop" MouseLeftButtonDown="StackPanel_MouseLeftButtonDown" MouseRightButtonDown="StackPanel_MouseRightButtonDown" >
+                                        <Image Source="{Binding Image}" Width="20" Height="20"/>
+                                        <TextBlock VerticalAlignment="Center" Text="{Binding Name}"/>
+                                    </StackPanel>
+                                </HierarchicalDataTemplate>
+                            </TreeView.Resources>
+                        </TreeView>
+
+                        <TreeView Visibility="Hidden" x:Name="treePlaybook_FV" Panel.ZIndex="0" Grid.Row="0" ContextMenuOpening="contextMenuOpening" ContextMenu="{DynamicResource PlaybookContextMenu}"  ItemsSource="{Binding ScoutTypes}" MouseDoubleClick="treePlaybook_MouseDoubleClick" SelectedItemChanged="treePlaybook_SelectedItemChanged">
+                            <TreeView.Resources>
+                                <HierarchicalDataTemplate DataType="{x:Type viewmodel:ScoutTypeViewModel}" ItemsSource="{Binding Path=Children}">
+                                    <StackPanel Orientation="Horizontal" MouseLeftButtonDown="StackPanel_MouseLeftButtonDown" MouseRightButtonDown="StackPanel_MouseRightButtonDown" >
+                                        <Image Source="{Binding Image}" Width="20" Height="20"/>
+                                        <TextBlock VerticalAlignment="Center" Text="{Binding ScoutTypeName}"/>
+                                    </StackPanel>
+                                </HierarchicalDataTemplate>
+
+                                <HierarchicalDataTemplate DataType="{x:Type viewmodel:FVFormationViewModel}" ItemsSource="{Binding Children}">
+                                    <StackPanel Orientation="Horizontal" MouseLeftButtonDown="StackPanel_MouseLeftButtonDown" MouseRightButtonDown="StackPanel_MouseRightButtonDown" >
+                                        <Image Source="{Binding Image}" Width="20" Height="20"/>
+                                        <TextBlock VerticalAlignment="Center" Text="{Binding FormationName}"/>
+                                    </StackPanel>
+                                </HierarchicalDataTemplate>
+
+                                <HierarchicalDataTemplate DataType="{x:Type viewmodel:PlayViewModel}" ItemsSource="{Binding Path=Children}">
+                                    <StackPanel ToolTip="{Binding ToolTip}" Orientation="Horizontal" MouseLeftButtonDown="StackPanel_MouseLeftButtonDown" MouseRightButtonDown="StackPanel_MouseRightButtonDown" >
+                                        <Image Source="{Binding Image}" Width="20" Height="20" />
+                                        <TextBlock Text="{Binding PlayName}" VerticalAlignment="Center" />
+                                    </StackPanel>
+                                </HierarchicalDataTemplate>
+                            </TreeView.Resources>
+                        </TreeView>
+
+                        <Button Visibility="Hidden" Grid.Row="1" Width="150" Name="btnToggleView" Click="btnToggleView_Click">Formation Name View</Button>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+        </Grid>
+        <Border Name="borderTools"  Grid.Row="3" Grid.RowSpan="1" Grid.Column="2" Grid.ColumnSpan="1" BorderBrush="Gray" BorderThickness="1">
+            <DockPanel Name="dockPanelTools" Background="{DynamicResource NormalBackgroundBrush}">
+                <Expander DockPanel.Dock="Top"  Margin="5" Name="expanderTool" Header="{Binding Name}" Visibility="{Binding Visible, Mode=TwoWay}" IsExpanded="True">
+                    <ListBox x:Name="listBoxTool" ItemTemplate="{StaticResource ListBoxTemplate}" ItemsSource="{Binding Tools}" SelectionChanged="listBoxTool_SelectionChanged" GotFocus="listBoxTool_GotFocus" MouseLeftButtonUp="listBoxTool_MouseLeftButtonUp" >
+                    </ListBox>
+                </Expander>
+                <Expander DockPanel.Dock="Top" Margin="5" Name="expanderTop" Header="{Binding Name}" Visibility="{Binding Visible, Mode=TwoWay}" IsExpanded="True">
+                    <ListBox x:Name="listBoxTop" ItemTemplate="{StaticResource ListBoxTemplate}" ItemsSource="{Binding Tools}" SelectionChanged="listBoxTop_SelectionChanged" MouseLeftButtonUp="listBoxTop_MouseLeftButtonUp" MouseDoubleClick="listBoxTop_MouseDoubleClick" GotFocus="listBoxTop_GotFocus">
+                    </ListBox>
+                </Expander>
+                <Expander DockPanel.Dock="Top" Margin="5" Name="expanderBottom" Header="{Binding Name}" Visibility="{Binding Visible, Mode=TwoWay}" IsExpanded="True">
+                    <ListBox Name="listBoxBottom" ItemTemplate="{StaticResource ListBoxTemplate}" ItemsSource="{Binding Tools}" SelectionChanged="listBoxBottom_SelectionChanged" MouseLeftButtonUp="listBoxBottom_MouseLeftButtonUp">
+                    </ListBox>
+                </Expander>
+                <Expander DockPanel.Dock="Top" Margin="5" Name="expanderAction" Header="{Binding Name}" Visibility="Hidden"  IsExpanded="True">
+                    <ListBox Name="listBoxAction" ItemTemplate="{StaticResource ListBoxTemplate}" ItemsSource="{Binding Tools}" SelectionChanged="listBoxAction_SelectionChanged" MouseLeftButtonUp="listBoxAction_MouseLeftButtonUp">
+                    </ListBox>
+                </Expander>
+            </DockPanel>
+        </Border>
+
+        <Grid x:Name="gridTopmost" Grid.Row="1" Grid.RowSpan="100" Grid.ColumnSpan="100" Visibility="Hidden">
+            <Grid x:Name="gridShadow" Background="White" Opacity="0.3"></Grid>
+            <Border Background="DarkCyan" CornerRadius="10" Width="250" Height="50">
+                <Border.Effect>
+                    <DropShadowEffect></DropShadowEffect>
+                </Border.Effect>
+                <StackPanel Background="Transparent" VerticalAlignment="Center" HorizontalAlignment="Center" Width="200" Orientation="Vertical">
+                    <TextBlock FontSize="20" HorizontalAlignment="Center" Foreground="White" Text="Loading 3D view">
+                    <TextBlock.Effect>
+                        <DropShadowEffect></DropShadowEffect>
+                    </TextBlock.Effect>
+                    </TextBlock>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>

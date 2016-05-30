@@ -1,0 +1,124 @@
+﻿<Window
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:viewmodel="clr-namespace:Webb.Playbook.ViewModel"
+    x:Class="Webb.Playbook.NewPlay"
+    Title="New Play" Height="600" Width="600" Background="{DynamicResource StackPanelBackgroundBrush}" WindowStartupLocation="CenterOwner"  Closed="Window_Closed" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
+    <Window.Resources>
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="Foreground" Value="{DynamicResource OutsideTextBrush}"/>
+        </Style>
+    </Window.Resources>
+    <Grid x:Name="grid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="35"/> 
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        
+        <StackPanel Visibility="Hidden" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Grid.Row="0" Grid.ColumnSpan="2">
+            <!--TextBlock VerticalAlignment="Center" Text="Name:"/-->
+            <!--<TextBox Width="100" Text="{Binding Path=PlayName}"/>-->
+            <TextBox x:Name="txtObj" TextAlignment="Center" Text="{Binding Path=ObjFormation.FormationName,Mode=TwoWay,UpdateSourceTrigger=Explicit}"/>
+            <TextBlock Text=" vs " FontSize="12" Height="19"></TextBlock>
+            <TextBox x:Name="txtOpp" TextAlignment="Center" Text="{Binding Path=OppFormation.FormationName,Mode=TwoWay,UpdateSourceTrigger=Explicit}"/>
+        </StackPanel>
+        
+        <TreeView x:Name="treeFormation" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{Binding Path=ScoutTypes}" >
+            <TreeView.Resources>
+                <HierarchicalDataTemplate DataType="{x:Type viewmodel:ScoutTypeViewModel}" ItemsSource="{Binding Path=Children}" >
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="{Binding Path=Image}" Width="20" Height="20" />
+                        <TextBlock VerticalAlignment="Center" Text="{Binding Path=ScoutTypeName}"/>
+                    </StackPanel>
+                </HierarchicalDataTemplate>
+
+                <HierarchicalDataTemplate DataType="{x:Type viewmodel:TitleViewModel}">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="{Binding Image}" Width="20" Height="20"/>
+                        <TextBlock VerticalAlignment="Center" Text="{Binding TitleName}"/>
+                    </StackPanel>
+                </HierarchicalDataTemplate>
+
+                <HierarchicalDataTemplate DataType="{x:Type viewmodel:PersonnelViewModel}" ItemsSource="{Binding Path=Children}">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="{Binding Path=Image}" Width="20" Height="20" />
+                        <TextBlock VerticalAlignment="Center" Text="{Binding Path=PersonnelName}"/>
+                    </StackPanel>
+                </HierarchicalDataTemplate>
+                
+                <HierarchicalDataTemplate DataType="{x:Type viewmodel:FormationViewModel}" ItemsSource="{Binding Path=Children}">
+                    <StackPanel Orientation="Horizontal" MouseLeftButtonDown="treeFormation_MouseLeftButtonDown" >
+                        <Image Source="{Binding Path=Image}" Width="20" Height="20" />
+                        <TextBlock VerticalAlignment="Center" Text="{Binding Path=FormationName}"/>
+                    </StackPanel>
+                </HierarchicalDataTemplate>
+                
+                <HierarchicalDataTemplate DataType="{x:Type viewmodel:FolderViewModel}" ItemsSource="{Binding Path=Children}">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="{Binding Path=Image}" Width="20" Height="20" />
+                        <TextBlock VerticalAlignment="Center" Text="{Binding Path=Name}"/>
+                    </StackPanel>
+                </HierarchicalDataTemplate>
+
+                <HierarchicalDataTemplate DataType="{x:Type viewmodel:PlayViewModel}" ItemsSource="{Binding Path=Children}">
+                    <StackPanel Orientation="Horizontal" MouseLeftButtonDown="treeFormation_MouseLeftButtonDown">
+                        <Image Source="{Binding Image}" Width="20" Height="20" />
+                        <TextBlock Text="{Binding PlayName}" VerticalAlignment="Center" />
+                    </StackPanel>
+                </HierarchicalDataTemplate>
+            </TreeView.Resources>
+        </TreeView>
+        
+        <StackPanel Margin="3" Grid.Row="2" Grid.Column="0" Orientation="Vertical">
+            <!--<Button Name="btnObject" Click="btnObject_Click">Set Offensive Formation</Button>-->
+            <Border Margin="0,5,10,0" BorderBrush="Gray" BorderThickness="1">
+                <TextBlock TextAlignment="Center" Text="{Binding Path=ObjFormation.FormationName}"/>
+            </Border>
+        </StackPanel>
+        
+        <StackPanel Margin="3"  Grid.Row="2" Grid.Column="1" Orientation="Vertical">
+            <!--<Button Name="btnOpponent" Click="btnOpponent_Click">Set Defensive Formation</Button>-->
+            <Border Margin="10,5,0,0" BorderBrush="Gray" BorderThickness="1">
+                <TextBlock TextAlignment="Center" Text="{Binding Path=OppFormation.FormationName}"/>
+            </Border>
+        </StackPanel>
+        
+        <TextBlock Margin="-6,7,0,-1" Grid.Row="2" Text="VS"  d:LayoutOverrides="GridBox" HorizontalAlignment="Left" Width="27" Grid.Column="1"  />
+        
+        <!-- 09-13-2010 Scott -->
+        <Grid Grid.Row="3" Grid.ColumnSpan="2" Margin="5,5,5,5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="35"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Name:"></TextBlock>
+            <Grid Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="80"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="tbPlayName" Grid.Column="0" Text="{Binding Path=PlayName,Mode=TwoWay}" Margin="0,0,0,0" TextChanged="TextBox_TextChanged" ></TextBox>
+                <TextBlock x:Name="textPrompt" Grid.Column="1" Foreground="Red" Visibility="Hidden" VerticalAlignment="Center" HorizontalAlignment="Center">Invalid</TextBlock>
+            </Grid>
+        </Grid>
+        
+        <StackPanel Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <!--<Button x:Name="btnRevOff" Margin="0,10,0,10" ToolTip="Reverse Offensive Formation" Click="btnRevOff_Click">
+                <Image Source="/Playbook;component/Resource/Offensive Play.ico"></Image>
+            </Button>
+            <Button x:Name="btnRevDef" Margin="10,10,30,10" ToolTip="Reverse Defensive Formation" Click="btnRevDef_Click">
+                <Image Source="/Playbook;component/Resource/Defensive Play.ico"></Image>
+            </Button>-->
+            <Button x:Name="btnOK" Width="60" Height="20" Click="btnOK_Click" Content="OK"/>
+            <Button x:Name="btnCancel" Margin="20,0,0,0" Width="60" Height="20" Click="btnCancel_Click" Content="Cancel"/>
+        </StackPanel>
+    </Grid>
+</Window>

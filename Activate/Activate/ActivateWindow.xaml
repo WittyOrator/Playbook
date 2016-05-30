@@ -1,0 +1,118 @@
+﻿<Window x:Class="Webb.Playbook.ActivateWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Webb Playbook" Height="420" Width="520"
+    WindowStartupLocation="CenterScreen"
+    ResizeMode="NoResize"
+    WindowStyle="ToolWindow"
+    >
+    <Grid Background="{DynamicResource NormalBackgroundBrush}">
+        <Grid.Resources>
+            <Style TargetType="{x:Type TextBlock}">
+                <Setter Property="Foreground" Value="{DynamicResource OutsideTextBrush}"/>
+            </Style>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="180"></RowDefinition>
+            <RowDefinition Height="80"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="75"></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <TextBlock x:Name="tbReal" Margin="5" FontSize="13" Grid.Row="0">
+            <Run>Your Webb Electronics product Trial has expired.</Run>
+            <LineBreak/>
+            <Run>To purchase this product for permanent use please contact sales at</Run>
+            <LineBreak/>
+            <Run Foreground="Blue">972-242-5400.</Run>
+            <LineBreak/>
+            <LineBreak/>
+            <Run>Once you have purchased the product, please call to activate your</Run>
+            <LineBreak/>
+            <Run>purchase for permanent use.</Run>
+            <Run>You must provide Webb Electronics the </Run>
+            <LineBreak/>
+            <Run>Seed number below to activate your purchase.</Run>
+            <LineBreak/>
+            <Run>Webb Electronics will provide you a key number to be entered in below.</Run>
+            <LineBreak/>
+            <Run>Once the key is entered click the Activate button. </Run>
+            <LineBreak/>
+            <Run>Click Close to cancel the activation and exit.</Run>
+        </TextBlock>
+        
+        <TextBlock x:Name="tbTrialed" Margin="5" FontSize="13" Grid.Row="0">
+            <Run>Your Webb Electronics product Trial has been activated.</Run>
+            <LineBreak/>
+            <Run>To purchase this product for permanent use please contact sales at</Run>
+            <LineBreak/>
+            <Run Foreground="Blue">866-999-9322.</Run>
+            <LineBreak/>
+            <LineBreak/>
+            <Run>Once you have purchased the product, please call to activate your</Run>
+            <LineBreak/>
+            <Run>purchase for permanent use.</Run>
+            <Run>You must provide Webb Electronics the </Run>
+            <LineBreak/>
+            <Run>Seed number below to activate your purchase.</Run>
+            <LineBreak/>
+            <Run>Webb Electronics will provide you a key number to be entered in below.</Run>
+            <LineBreak/>
+            <Run>Once the key is entered click the Activate button. </Run>
+            <LineBreak/>
+            <Run>Click Close to cancel the activation and exit.</Run>
+        </TextBlock>
+        
+        <TextBlock x:Name="tbTrial" Margin="5" FontSize="13" Grid.Row="0">
+            <Run>Your Webb product has been installed.</Run>
+            <LineBreak/>
+            <Run>To activate your product for trial or purchase,call sales at</Run> <Run Foreground="Blue">972-242-5400.</Run>
+            <LineBreak/>
+            <Run>You must provide Webb Electronics with the seed number below to activate</Run>
+            <LineBreak/>
+            <Run>your trial or purchase.</Run>
+            <LineBreak/>
+            <LineBreak/>
+            <Run>Webb Electronics provides you with a key.</Run>
+            <LineBreak/>
+            <Run>Type in the key and click the Activate button.</Run>
+            <LineBreak/>
+            <Run>Click Close to exit Activation.</Run>
+            <LineBreak/>
+            <LineBreak/>
+                <Run>Webb Office Hours:</Run> <Run Foreground="Blue" >8-5 M-F</Run> <Run>Central Time.</Run>
+        </TextBlock>
+        <Border Margin="2" CornerRadius="5" Grid.Row="0" Grid.RowSpan="1" BorderThickness="1" BorderBrush="{DynamicResource NormalBorderBrush}"></Border>
+        
+        <StackPanel Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel Margin="0,5" Orientation="Horizontal">
+                <TextBlock FontSize="15" VerticalAlignment="Center" Width="80">Seed:</TextBlock>
+                <TextBox x:Name="tbSeed" FontSize="15" Width="300" IsReadOnly="True" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBox>
+            </StackPanel>
+            <StackPanel Margin="0,5" Orientation="Horizontal">
+                <TextBlock FontSize="15" VerticalAlignment="Center" Width="80">Key:</TextBlock>
+                <TextBox x:Name="tbSerial" FontSize="15" Width="300" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBox>
+            </StackPanel>
+        </StackPanel>
+        
+        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button x:Name="btnOK" Margin="5,0"  Width="80" Click="btnOK_Click">Activate</Button>
+            <Button x:Name="btnCancel" Margin="5,0" Width="80" Click="btnCancel_Click">Close</Button>
+            <Button x:Name="btnContinueTrial" Visibility="Collapsed" Margin="5,0" Width="100" Click="btnContinueTrial_Click">Continue Trial</Button>
+        </StackPanel>
+        
+        <Border Margin="2" CornerRadius="5" Grid.Row="1" Grid.RowSpan="2" BorderThickness="1" BorderBrush="{DynamicResource NormalBorderBrush}"></Border>
+        
+        <TextBlock Margin="5" FontSize="13" Grid.Row="3">
+            <Run>Webb Electronics,LTD</Run>
+            <LineBreak/>
+            <Run>1420 Westway Circle Carrollton,TX75006</Run>
+            <LineBreak/>
+            <Run>Phone</Run> <Run Foreground="Blue">972-242-5400</Run>
+            <LineBreak></LineBreak>
+            <Run>Website</Run> <Hyperlink NavigateUri="http://www.webbelectronics.com" RequestNavigate="Hyperlink_RequestNavigate" >www.webbelectronics.com</Hyperlink>
+        </TextBlock>
+        
+        <Border Margin="2" CornerRadius="5" Grid.Row="3" Grid.RowSpan="1" BorderThickness="1" BorderBrush="{DynamicResource NormalBorderBrush}"></Border>
+    </Grid>
+</Window>

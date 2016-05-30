@@ -1,0 +1,49 @@
+﻿<Window
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:System="clr-namespace:System;assembly=mscorlib"
+    xmlns:data="clr-namespace:Webb.Playbook.Data;assembly=Webb.Playbook.Data"
+    x:Class="Webb.Playbook.PlayEditor"
+    Title="PlayEditor" Height="220" Width="295"   WindowStartupLocation="CenterOwner" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
+    <Window.Resources>
+        <data:EnumBooleanConverter x:Key="EnumBooleanConverter" />
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="Foreground" Value="{DynamicResource OutsideTextBrush}"/>
+        </Style>
+    </Window.Resources>
+    <Grid x:Name="gridPlay">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="73.5"/>
+            <RowDefinition Height="73.5"/>
+            <RowDefinition Height="39"/>
+        </Grid.RowDefinitions>
+        
+        <GroupBox Margin="0,-2,0,0"   Grid.Row="0" Header="HashLine">
+            <Grid>
+                <RadioButton HorizontalAlignment="Left" Margin="22,10.723,0,8" IsChecked="{Binding Path=HashLine, Converter={StaticResource EnumBooleanConverter}, ConverterParameter=Left, Mode=TwoWay}">
+                    <TextBlock Text="Left"/>
+                </RadioButton>
+                <RadioButton Margin="111.5,10.723,100,0" IsChecked="{Binding Path=HashLine, Converter={StaticResource EnumBooleanConverter}, ConverterParameter=Middle, Mode=TwoWay}"  VerticalAlignment="Top" HorizontalAlignment="Center" >
+                    <TextBlock Text="Middle"/>
+                </RadioButton>
+                <RadioButton Margin="0,10.723,18,0" IsChecked="{Binding Path=HashLine, Converter={StaticResource EnumBooleanConverter}, ConverterParameter=Right, Mode=TwoWay}"  HorizontalAlignment="Right"  VerticalAlignment="Top" >
+                    <TextBlock Text="Right"/>
+                </RadioButton>
+            </Grid>
+        </GroupBox>
+        <Border Grid.Row="1" BorderBrush="Gray" BorderThickness="1">
+            <Grid  Grid.Row="1">
+                <ComboBox  Margin="45.02,20,53.5,33.111"  ItemsSource="{Binding Path=Marks, Mode=TwoWay}" SelectedValue="{Binding Path=Mark, Mode=TwoWay}"/>
+                <TextBlock HorizontalAlignment="Left" Margin="10,20,0,24.111"  Text="Mark :" TextWrapping="Wrap"/>
+            
+            </Grid>
+       </Border>
+       
+        <StackPanel Grid.Row="2" Grid.Column="0"  Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button x:Name="btnOK" Width="60" Height="20" Click="btnOK_Click" Content="OK"/>
+            <Button x:Name="btnCancel" Margin="20,0,0,0" Width="60" Height="20" Click="btnCancel_Click" Content="Cancel"/>
+        </StackPanel>
+       
+        
+    </Grid>
+</Window>

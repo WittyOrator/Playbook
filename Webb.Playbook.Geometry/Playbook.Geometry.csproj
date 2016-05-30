@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6F6D5FCE-F986-4DBF-8EFC-4F3BCD1417F9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Webb.Playbook.Geometry</RootNamespace>
+    <AssemblyName>Webb.Playbook.Geometry</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\Bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationCore">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationProvider">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WEBBGAMEDATALib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=9be245af2725da3c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Bin\Diagram\WEBBGAMEDATALib.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Actions\AbstractAction.cs" />
+    <Compile Include="Actions\ActionManager.cs" />
+    <Compile Include="Actions\Actions.cs" />
+    <Compile Include="Actions\GeometryAction.cs" />
+    <Compile Include="Actions\History\IActionHistory.cs" />
+    <Compile Include="Actions\History\SimpleHistory.cs" />
+    <Compile Include="Actions\History\SimpleHistoryNode.cs" />
+    <Compile Include="Actions\IAction.cs" />
+    <Compile Include="Actions\IMultiAction.cs" />
+    <Compile Include="Actions\Transaction.cs" />
+    <Compile Include="Actions\TransactionBase.cs" />
+    <Compile Include="Behavior\Assign.cs" />
+    <Compile Include="Behavior\Behavior.cs" />
+    <Compile Include="Behavior\Dragger.cs" />
+    <Compile Include="Behavior\Fake.cs" />
+    <Compile Include="Behavior\PassBlockArea.cs" />
+    <Compile Include="Behavior\PassBlockTool.cs" />
+    <Compile Include="Behavior\RunBlockTool.cs" />
+    <Compile Include="Behavior\Selector.cs" />
+    <Compile Include="Behavior\PreSnapMotion.cs" />
+    <Compile Include="Behavior\PlaygroundDragger.cs" />
+    <Compile Include="Behavior\Text.cs" />
+    <Compile Include="Behavior\Pen.cs" />
+    <Compile Include="Behavior\Image.cs" />
+    <Compile Include="Commands\Commands.cs" />
+    <Compile Include="Conrdinates\CoordinateSystem.cs" />
+    <Compile Include="Conrdinates\GridLines.cs" />
+    <Compile Include="Conrdinates\Playground.cs" />
+    <Compile Include="Diagram.cs" />
+    <Compile Include="DiagramBackgroundWindow.xaml.cs">
+      <DependentUpon>DiagramBackgroundWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Drawing.cs" />
+    <Compile Include="Effects.cs" />
+    <Compile Include="FreeDraw\FreeLine.cs" />
+    <Compile Include="Game\PBImage.cs" />
+    <Compile Include="Game\PBPlayer.cs" />
+    <Compile Include="Behavior\PlayerCreator.cs" />
+    <Compile Include="Behavior\PostSnapMotion.cs" />
+    <Compile Include="Behavior\Route.cs" />
+    <Compile Include="Behavior\Setter.cs" />
+    <Compile Include="Game\PBRoute.cs" />
+    <Compile Include="Game\Zone.cs" />
+    <Compile Include="Lists\CollectionWithEvents.cs" />
+    <Compile Include="Lists\DependencyAlgorithms.cs" />
+    <Compile Include="Lists\DependencyList.cs" />
+    <Compile Include="Lists\FigureList.cs" />
+    <Compile Include="Playground.xaml.cs">
+      <DependentUpon>Playground.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Serialization\DrawingDeserializer.cs" />
+    <Compile Include="Serialization\DrawingSerializer.cs" />
+    <Compile Include="Shapes\Arc\Arc.cs" />
+    <Compile Include="Shapes\CompositeFigure.cs" />
+    <Compile Include="Shapes\CoordinatesShapeBase.cs" />
+    <Compile Include="Shapes\Creators\CircleCreator.cs" />
+    <Compile Include="Shapes\Creators\FigureCreator.cs" />
+    <Compile Include="Shapes\Creators\SquareCreator.cs" />
+    <Compile Include="Shapes\Ellipse\Ellipse.cs" />
+    <Compile Include="Shapes\Factory.cs" />
+    <Compile Include="Shapes\FigureBase.cs" />
+    <Compile Include="Shapes\IMovable.cs" />
+    <Compile Include="Shapes\Label\Label.cs" />
+    <Compile Include="Shapes\Label\LabelBase.cs" />
+    <Compile Include="Shapes\Line\ILine.cs" />
+    <Compile Include="Shapes\Line\Line.cs" />
+    <Compile Include="Shapes\Line\LineBase.cs" />
+    <Compile Include="Shapes\Line\LineCreator.cs" />
+    <Compile Include="Shapes\Line\PreLineCreator.cs" />
+    <Compile Include="Shapes\Point\FreePoint.cs" />
+    <Compile Include="Shapes\Point\IPoint.cs" />
+    <Compile Include="Shapes\Point\PointBase.cs" />
+    <Compile Include="Shapes\Rectangle\Rectangle.cs" />
+    <Compile Include="Shapes\RootFigureList.cs" />
+    <Compile Include="Shapes\ShapeBase.cs" />
+    <Compile Include="Utilities.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="DiagramBackgroundWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Playground.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Webb.Playbook.ColorPicker\Playbook.ColorPicker.csproj">
+      <Project>{99E90579-62FC-4898-B168-24F7DBD3A34D}</Project>
+      <Name>Playbook.ColorPicker</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Webb.Playbook.Data\Playbook.Data.csproj">
+      <Project>{7B31006D-D58B-426E-B69D-C995FCBF30E9}</Project>
+      <Name>Playbook.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Webb.Playbook.FontChooser\Playbook.FontChooser.csproj">
+      <Project>{BA5113A3-EA25-4BA3-96E1-7FB10D9201F0}</Project>
+      <Name>Playbook.FontChooser</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.WinFX.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

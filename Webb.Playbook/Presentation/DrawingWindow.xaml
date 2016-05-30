@@ -1,0 +1,17 @@
+﻿<Window x:Class="Webb.Playbook.Presentation.DrawingWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="DrawingWindow"
+    AllowsTransparency="True"
+    Background="Transparent"
+    WindowStyle="None"
+    Topmost="True"
+    WindowState="Normal"
+    Focusable="False"
+    ShowInTaskbar="False">
+    <Grid>
+        <Canvas x:Name="CanvasPalette">
+            <TextBlock x:Name="textblockTitle" FontSize="20" Opacity="0.5"></TextBlock>
+        </Canvas>
+    </Grid>
+</Window>

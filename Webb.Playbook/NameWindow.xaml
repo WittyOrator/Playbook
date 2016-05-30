@@ -1,0 +1,25 @@
+﻿<Window x:Class="Webb.Playbook.NameWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="{Binding Title}" Height="180" Width="473" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" Background="{DynamicResource NormalBackgroundBrush}" Loaded="Window_Loaded" KeyDown="Window_KeyDown">
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{DynamicResource OutsideTextBrush}"/>
+        </Style>
+    </Window.Resources>
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Name="textTitle" VerticalAlignment="Center" Grid.Row="0" Text="{Binding Name}"></TextBlock>
+            <TextBox Name="textName" Width="304" Margin="10,0,0,0" Grid.Row="0" Text="{Binding Value}" TextChanged="textName_TextChanged"></TextBox>
+            <TextBlock Name="textPrompt" Margin="10,0,0,0" Grid.Row="0" VerticalAlignment="Center" Text="Invalid" Foreground="Red" Visibility="Hidden"></TextBlock>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Name="btnOK" Content="OK" Width="60" Click="btnOK_Click"></Button>
+            <Button Name="btnCancel" Content="Cancel" Width="60" Margin="10,0,0,0" Click="btnCancel_Click"></Button>
+        </StackPanel>
+    </Grid>
+</Window>

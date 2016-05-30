@@ -1,0 +1,753 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{79C95AE8-CBF8-42B9-AD77-DA39BF98FE80}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Webb.Playbook</RootNamespace>
+    <AssemblyName>Playbook</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <ApplicationIcon>Main.ico</ApplicationIcon>
+    <ManifestCertificateThumbprint>E5024916AD76EB1684D2EFB86FF041C984F9E52C</ManifestCertificateThumbprint>
+    <ManifestKeyFile>Webb.Playbook_TemporaryKey.pfx</ManifestKeyFile>
+    <GenerateManifests>false</GenerateManifests>
+    <SignManifests>false</SignManifests>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <StartupObject>Webb.Playbook.Program</StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <PublishUrl>E:\Playbook\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\Bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AxInterop.WEBBWEBPLAYERLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Bin\AxInterop.WEBBWEBPLAYERLib.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Zip\bin\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.DirectX, Version=1.0.2902.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+    <Reference Include="Microsoft.DirectX.AudioVideoPlayback, Version=1.0.2902.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+    <Reference Include="Microsoft.DirectX.DirectSound, Version=1.0.2902.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+    <Reference Include="Microsoft.Office.Interop.PowerPoint, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" />
+    <Reference Include="Office, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" />
+    <Reference Include="PresentationFramework.Classic" />
+    <Reference Include="ReachFramework">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Printing">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationProvider">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationCore">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsFormsIntegration">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WPFToolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\WPFToolkit.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="About.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AnimationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CallItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CoachingPointsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ColorSettingWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ConfigWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="DiagramBackgroundWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FieldsSettingWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ImageSetupWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="NameWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NewCall.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="NewFormation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NewPersonnel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NewPlay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PersonnelEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PlayEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Presentation\DrawingWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Presentation\PresentationWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Presentation\CreatePresentationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Presentation\SelectPlayWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Presentation\VideoWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Print\GameSetupWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Print\PrintPreviewWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Print\SelectPlayWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Print\SelectPlayForRptWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SelectPlayForImportWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SnapSettingWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SplashWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Black.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Blue.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Grey.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Shiny Blue.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Shiny Red.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Whistler Blue.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CreatePlayWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ToolListWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SelectPlayForExportWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="About.xaml.cs">
+      <DependentUpon>About.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AnimationWindow.xaml.cs">
+      <DependentUpon>AnimationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CallItem.xaml.cs">
+      <DependentUpon>CallItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CoachingPointsWindow.xaml.cs">
+      <DependentUpon>CoachingPointsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ColorSettingWindow.xaml.cs">
+      <DependentUpon>ColorSettingWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ConfigWindow.xaml.cs">
+      <DependentUpon>ConfigWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DiagramBackgroundWindow.xaml.cs">
+      <DependentUpon>DiagramBackgroundWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FieldsSettingWindow.xaml.cs">
+      <DependentUpon>FieldsSettingWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ImageSetupWindow.xaml.cs">
+      <DependentUpon>ImageSetupWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Interop.cs" />
+    <Compile Include="Mode.cs" />
+    <Compile Include="NameWindow.xaml.cs">
+      <DependentUpon>NameWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NewCall.xaml.cs">
+      <DependentUpon>NewCall.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NewFormation.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>NewFormation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NewPersonnel.xaml.cs">
+      <DependentUpon>NewPersonnel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NewPlay.xaml.cs">
+      <DependentUpon>NewPlay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PersonnelEditor.xaml.cs">
+      <DependentUpon>PersonnelEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PlayEditor.xaml.cs">
+      <DependentUpon>PlayEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PlayUtility.cs" />
+    <Compile Include="Presentation\DrawingWindow.xaml.cs">
+      <DependentUpon>DrawingWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Presentation\MessageFilter.cs" />
+    <Compile Include="Presentation\PresentationWindow.xaml.cs">
+      <DependentUpon>PresentationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Presentation\CreatePresentationWindow.xaml.cs">
+      <DependentUpon>CreatePresentationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Presentation\SelectPlayWindow.xaml.cs">
+      <DependentUpon>SelectPlayWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Presentation\VideoWindow.xaml.cs">
+      <DependentUpon>VideoWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Print\CustomDocumentViewer.cs" />
+    <Compile Include="Print\GameSetupWindow.xaml.cs">
+      <DependentUpon>GameSetupWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Print\PlayPaginator.cs" />
+    <Compile Include="Print\PrintPreviewWindow.xaml.cs">
+      <DependentUpon>PrintPreviewWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Print\SelectPlayWindow.xaml.cs">
+      <DependentUpon>SelectPlayWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Print\SelectPlayForRptWindow.xaml.cs">
+      <DependentUpon>SelectPlayForRptWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="SelectPlayForImportWindow.xaml.cs">
+      <DependentUpon>SelectPlayForImportWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SnapSettingWindow.xaml.cs">
+      <DependentUpon>SnapSettingWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SplashWindow.xaml.cs">
+      <DependentUpon>SplashWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ToolListWindow.xaml.cs">
+      <DependentUpon>ToolListWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools.cs" />
+    <Compile Include="ViewModel\AdjustmentRootViewModel.cs" />
+    <Compile Include="ViewModel\AdjustmentTypeViewModel.cs" />
+    <Compile Include="ViewModel\AdjustmentViewModel.cs" />
+    <Compile Include="ViewModel\FolderViewModel.cs" />
+    <Compile Include="ViewModel\FormationRootViewModel.cs" />
+    <Compile Include="ViewModel\FormationViewModel.cs" />
+    <Compile Include="ViewModel\FVFormationViewModel.cs" />
+    <Compile Include="ViewModel\MenuViewModel.cs" />
+    <Compile Include="ViewModel\PersonnelViewModel.cs" />
+    <Compile Include="ViewModel\PlaybookRootViewModel.cs" />
+    <Compile Include="ViewModel\PlayTypeViewModel.cs" />
+    <Compile Include="ViewModel\PlayViewModel.cs" />
+    <Compile Include="ViewModel\PVFormationViewModel.cs" />
+    <Compile Include="ViewModel\ScoutTypeViewModel.cs" />
+    <Compile Include="ViewModel\TreeViewItemViewModel.cs" />
+    <Compile Include="CreatePlayWindow.xaml.cs">
+      <DependentUpon>CreatePlayWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\PlayFolderViewModel.cs" />
+    <Compile Include="ViewModel\TitleViewModel.cs" />
+    <Compile Include="ViewModel\PPTViewModel.cs" />
+    <Compile Include="ViewModel\VideoViewModel.cs" />
+    <Compile Include="ZipClass.cs" />
+    <Compile Include="SelectPlayForExportWindow.xaml.cs">
+      <DependentUpon>SelectPlayForExportWindow.xaml</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="app.manifest" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Resource\Thumbs.db" />
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Activate\Activate.csproj">
+      <Project>{6CA3C50C-1179-47CA-909E-5BE96CC7279A}</Project>
+      <Name>Activate</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ShellBasics\ShellLib.csproj">
+      <Project>{B748E75E-AFF9-4FEA-8581-7F04AD5DA539}</Project>
+      <Name>ShellLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Webb.Playbook.Call\Playbook.Call.csproj">
+      <Project>{43428116-4BC0-4B4B-98D0-E8C475BF730C}</Project>
+      <Name>Playbook.Call</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Webb.Playbook.ColorPicker\Playbook.ColorPicker.csproj">
+      <Project>{99E90579-62FC-4898-B168-24F7DBD3A34D}</Project>
+      <Name>Playbook.ColorPicker</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Webb.Playbook.Data\Playbook.Data.csproj">
+      <Project>{7B31006D-D58B-426E-B69D-C995FCBF30E9}</Project>
+      <Name>Playbook.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Webb.Playbook.Geometry\Playbook.Geometry.csproj">
+      <Project>{6F6D5FCE-F986-4DBF-8EFC-4F3BCD1417F9}</Project>
+      <Name>Playbook.Geometry</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Webb.Playbook.Team\Playbook.Team.csproj">
+      <Project>{2D28581A-F9F1-449C-8D44-564FCC639C2B}</Project>
+      <Name>Playbook.Team</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\2 Point Center.png" />
+    <Resource Include="Resource\2 Point Left.png" />
+    <Resource Include="Resource\2 Point Right.png" />
+    <Resource Include="Resource\2 Points Center.png" />
+    <Resource Include="Resource\3 Point Left.png" />
+    <Resource Include="Resource\3 Point Right.png" />
+    <Resource Include="Resource\3D View.ico" />
+    <Resource Include="Resource\4 Point.png" />
+    <Resource Include="Resource\Assign Man Coverage.png" />
+    <Resource Include="Resource\Assign Man Press.png" />
+    <Resource Include="Resource\Assignment.png" />
+    <Resource Include="Resource\Assignments.png" />
+    <Resource Include="Resource\Clear.png" />
+    <Resource Include="Resource\Drag Position.png" />
+    <Resource Include="Resource\Drop Step 1.png" />
+    <Resource Include="Resource\Drop Step 3.png" />
+    <Resource Include="Resource\Drop Step 5.png" />
+    <Resource Include="Resource\Drop Step 7.png" />
+    <Resource Include="Resource\Gridlines.ico" />
+    <Resource Include="Resource\Open.ico" />
+    <Resource Include="Resource\Pass Block Area.png" />
+    <Resource Include="Resource\Pass Block.png" />
+    <Resource Include="Resource\Play.png" />
+    <Resource Include="Resource\Pre Snap Motion.png" />
+    <Resource Include="Resource\Run Block.png" />
+    <Resource Include="Resource\Select Position.png" />
+    <Resource Include="Resource\Set.png" />
+    <Resource Include="Resource\Shade Left.png" />
+    <Resource Include="Resource\Shade Right.png" />
+    <Resource Include="Resource\Stances.png" />
+    <Resource Include="Resource\Still.png" />
+    <Resource Include="Resource\Stop.png" />
+    <Resource Include="Resource\Zone.png" />
+    <Resource Include="Resource\Zones.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Main.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Team.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Print.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Post Snap Motion.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Routes.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Calls.ico" />
+    <Resource Include="Resource\Notes.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\CursorHand.cur" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Assign.png" />
+    <Resource Include="Resource\Fake.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\DefHReverse.ico" />
+    <Resource Include="Resource\Football.png" />
+    <Resource Include="Resource\HReverse.ico" />
+    <Resource Include="Resource\OffHReverse.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Personnel.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Defense.ico" />
+    <Resource Include="Resource\Folder.ico" />
+    <Resource Include="Resource\Offense.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Def Formation.ico" />
+    <Resource Include="Resource\Off Formation.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Add Position.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Remove Position.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Play.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\CloseFolder.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Rename.ico" />
+    <Resource Include="Resource\VReverse.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Pass.ico" />
+    <Resource Include="Resource\Run.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Animation.png" />
+    <Resource Include="Resource\BeeLine.ico" />
+    <Resource Include="Resource\Close Animation.png" />
+    <Resource Include="Resource\Create Play.ico" />
+    <Resource Include="Resource\CurvyLine.ico" />
+    <Resource Include="Resource\Defensive Play.ico" />
+    <Resource Include="Resource\JaggedLine.ico" />
+    <Resource Include="Resource\Offensive Play.ico" />
+    <Resource Include="Resource\playground.bmp" />
+    <Resource Include="Resource\Redo.png" />
+    <Resource Include="Resource\Undo.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Coaching Points.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Text.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Save As.png" />
+    <Resource Include="Resource\Save.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\new.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Drag Playground.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Arrow.png" />
+    <Resource Include="Resource\Block.png" />
+    <Resource Include="Resource\Pen.png" />
+    <Resource Include="Resource\Switch Routes.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Dashed.png" />
+    <Resource Include="Resource\Dotted.png" />
+    <Resource Include="Resource\Solid.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\None.png" />
+    <Resource Include="Resource\Snap.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\logo.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Report.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Block Person.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Splash.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Next.png" />
+    <Resource Include="Resource\Previous.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Presentation.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\SolidPen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Load Base Formation.ico" />
+    <Resource Include="Resource\Save Base Formation.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Ppt.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Help Topics.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Disabled.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Video.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Kick Formation.ico" />
+    <Resource Include="Resource\Kicks.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Accessibility">
+      <Guid>{1EA4DBF0-3C3B-11CF-810C-00AA00389B71}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>1</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Photoshop">
+      <Guid>{E891EE9A-D0AE-4CB4-8871-F92C0109F18E}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="WEBBWEBPLAYERLib">
+      <Guid>{87D82E4A-B1B5-4B86-AAA0-53A0A1F43D6E}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\record.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\ArrowLine.png" />
+    <Resource Include="Resource\BlockLine.png" />
+    <Resource Include="Resource\Bubble.png" />
+    <Resource Include="Resource\Circle.png" />
+    <Resource Include="Resource\hand.png" />
+    <Resource Include="Resource\Line.png" />
+    <Resource Include="Resource\Square.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PostBuildEvent>
+		xcopy "$(ProjectDir)Themes\*.xaml" "$(SolutionDir)Bin\Themes\" /e /D /Y
+		xcopy "$(ProjectDir)Resource\*.png" "$(SolutionDir)Bin\Resource\" /e /D /Y
+                xcopy "$(ProjectDir)Resource\*.bmp" "$(SolutionDir)Bin\Resource\" /e /D /Y
+		xcopy "$(ProjectDir)Resource\*.ico" "$(SolutionDir)Bin\Resource\" /e /D /Y
+		xcopy "$(ProjectDir)Resource\*.cur" "$(SolutionDir)Bin\Resource\" /e /D /Y
+	</PostBuildEvent>
+  </PropertyGroup>
+</Project>
